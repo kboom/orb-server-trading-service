@@ -1,0 +1,36 @@
+buildscript {
+    repositories {
+        maven {
+            url('http://localhost:10001/content/groups/public/')
+        }
+    }
+    dependencies {
+        classpath 'com.kbhit.orangebox:orb-service-plugin:1.2-SNAPSHOT'
+    }
+}
+
+apply plugin: 'orb-service'
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+orbService {
+    name = 'orb-trading'
+    version = '1.0'
+    configServerUri = 'http://orb-server-config:8888'
+    serviceLocatorUri = 'http://orb-service-locator:8761/eureka'
+}
+
+docker {
+    url = 'http://192.168.99.100:2376'
+    certPath = file(System.getProperty('docker.cert.path') ?: "${System.getProperty('user.home')}/.docker/machine/machines/default")
+}
+
+repositories {
+    maven {
+        url('http://localhost:10001/content/groups/public/')
+    }
+}
+
