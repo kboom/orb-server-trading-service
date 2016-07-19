@@ -1,12 +1,16 @@
 buildscript {
+
     repositories {
+        mavenCentral()
         maven {
-            url('http://localhost:10001/content/groups/public/')
+            url "http://dl.bintray.com/kboom/gradle-plugins"
         }
     }
+
     dependencies {
-        classpath 'com.kbhit.orangebox:orb-service-plugin:1.2-SNAPSHOT'
+        classpath 'com.kbhit.orangebox:orb-service-plugin:1.1'
     }
+
 }
 
 apply plugin: 'orb-service'
@@ -29,8 +33,13 @@ docker {
 }
 
 repositories {
-    maven {
-        url('http://localhost:10001/content/groups/public/')
-    }
+    mavenCentral()
 }
 
+task stage {
+    dependsOn build
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.14'
+}
