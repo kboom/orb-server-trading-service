@@ -1,1 +1,1 @@
-web: java -jar -Dserver.port=$PORT build/libs/orb-trading-1.0.jar --ORANGEBOX_CONFIG_SERVER_URI=https://orb-server-config-service.herokuapp.com --spring.profiles.active=heroku
+web: java -jar -Dserver.port=$PORT build/libs/orb-trading-1.0.jar --spring.profiles.active=heroku
