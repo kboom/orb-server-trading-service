@@ -14,21 +14,10 @@ class GetTradesIntegrationTest extends AbstractIntegrationTest {
         testDataLoader.reloadTestData()
     }
 
-    def "Gets api"() {
+    def "Gets single trade"() {
         given:
-        def request = given()
-                .contentType("application/json")
-        when:
-        def response = request.when().get("/api")
+        def request = given().contentType("application/json")
 
-        then:
-        response.then().statusCode(200);
-    }
-
-    def "Gets api - resource list"() {
-        given:
-        def request = given()
-                .contentType("application/json")
         when:
         def response = request.when().get("/api")
 

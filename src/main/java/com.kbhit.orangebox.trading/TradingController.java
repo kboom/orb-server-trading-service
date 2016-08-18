@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TradingController {
 
-    @ApiOperation(value = "test", nickname = "testNickname")
-    @RequestMapping("/greet")
+    @ApiOperation(value = "trades", nickname = "trades")
+    @RequestMapping("/trades")
     public String index() {
         return "Greetings from Spring Boot!";
     }
