@@ -18,10 +18,10 @@ public class Bid {
     @ManyToOne
     private Bidder bidder;
 
-    @OneToMany
+    @OneToMany(mappedBy = "id")
     private Set<Item> offeredItems;
 
-    @OneToMany
+    @OneToMany(mappedBy = "id")
     private Set<Item> requestedItems;
 
 }
