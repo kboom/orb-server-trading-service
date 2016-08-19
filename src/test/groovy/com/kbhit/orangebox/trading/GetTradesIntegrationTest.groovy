@@ -22,7 +22,7 @@ class GetTradesIntegrationTest extends AbstractIntegrationTest {
         def response = request.when().get("/trades/1")
 
         then:
-        response.then().body(matchesJsonSchemaInClasspath("api.json"))
+        response.then().body(matchesJsonSchemaInClasspath("trade.json"))
     }
 
 }

@@ -4,22 +4,18 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
-public class BidderId implements Serializable {
+public class ItemId implements Serializable {
 
     private String id;
-
-    BidderId(String id) {
-        this.id = id;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        BidderId bidderId = (BidderId) o;
+        ItemId itemId = (ItemId) o;
 
-        return id != null ? id.equals(bidderId.id) : bidderId.id == null;
+        return id != null ? id.equals(itemId.id) : itemId.id == null;
 
     }
 
@@ -28,8 +24,8 @@ public class BidderId implements Serializable {
         return id != null ? id.hashCode() : 0;
     }
 
-    public static BidderId bidderId(String id) {
-        return new BidderId(id);
+    ItemId(String id) {
+        this.id = id;
     }
 
 }

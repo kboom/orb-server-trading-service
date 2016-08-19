@@ -1,13 +1,14 @@
 package com.kbhit.orangebox.trading.domain;
 
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 @Embeddable
-public class TradeId {
+public class TradeId implements Serializable {
 
-    private Long id;
+    private String id;
 
-    TradeId(Long id) {
+    TradeId(String id) {
         this.id = id;
     }
 
@@ -27,7 +28,7 @@ public class TradeId {
         return id != null ? id.hashCode() : 0;
     }
 
-    public static TradeId tradeId(long id) {
+    public static TradeId referenceTrade(String id) {
         return new TradeId(id);
     }
 

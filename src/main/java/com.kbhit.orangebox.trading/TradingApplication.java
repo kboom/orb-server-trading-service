@@ -15,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableEurekaClient
 @Configuration
 @EnableSwagger2
-@EnableJpaRepositories("com.kbhit.orangebox.api.trading.domain.repository")
+@EnableJpaRepositories("com.kbhit.orangebox.trading.domain.repository")
 public class TradingApplication {
 
     @Bean

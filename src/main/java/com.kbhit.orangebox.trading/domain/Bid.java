@@ -15,6 +15,7 @@ public class Bid {
 
     private Date placeDate;
 
+    @ManyToOne
     private Bidder bidder;
 
     @OneToMany
