@@ -18,10 +18,10 @@ public class Bid {
     @ManyToOne
     private Bidder bidder;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "id")
     private Set<Item> offeredItems;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "id")
     private Set<Item> requestedItems;
 
 }

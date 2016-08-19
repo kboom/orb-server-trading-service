@@ -1,8 +1,6 @@
 package com.kbhit.orangebox.trading.domain;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "ITEMS")
@@ -10,6 +8,10 @@ public class Item {
 
     @EmbeddedId
     private ItemId id;
+
+    @ManyToOne
+    @JoinColumn(name = "bidId")
+    private Bid bid;
 
     private String name;
 
