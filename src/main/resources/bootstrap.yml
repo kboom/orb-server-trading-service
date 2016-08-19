@@ -6,7 +6,6 @@ spring:
       failFast: true
       uri: ${ORANGEBOX_CONFIG_SERVER_URI:http://localhost:8888}
 
-
 ---
 spring:
   profiles: dev
