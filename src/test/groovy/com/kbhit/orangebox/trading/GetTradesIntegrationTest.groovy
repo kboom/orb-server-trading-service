@@ -19,7 +19,7 @@ class GetTradesIntegrationTest extends AbstractIntegrationTest {
         def request = given().contentType("application/json")
 
         when:
-        def response = request.when().get("/api")
+        def response = request.when().get("/trades/1")
 
         then:
         response.then().body(matchesJsonSchemaInClasspath("api.json"))

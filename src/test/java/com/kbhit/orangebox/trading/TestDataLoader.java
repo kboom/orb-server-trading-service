@@ -16,7 +16,7 @@ public class TestDataLoader {
     public void reloadTestData() {
         DataSourceDestination dataSourceDestination = new DataSourceDestination(dataSource);
         DbSetup dbSetup = new DbSetup(dataSourceDestination,
-                sequenceOf(TestDataSet.DELETE_API_RESOURCES, TestDataSet.INSERT_API_RESOURCES));
+                sequenceOf(TestDataSet.DELETE_TRADE_RESOURCES, TestDataSet.INSERT_TRADE_RESOURCES));
         dbSetup.launch();
     }
 
