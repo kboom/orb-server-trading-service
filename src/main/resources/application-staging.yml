@@ -3,7 +3,7 @@ spring:
     active: staging
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://ec2-54-163-240-101.compute-1.amazonaws.com:5432/d5h7161448cqgm?user=cqtezvcypmpgws&password=W8Y04VRBudTd92fC8RrK8lmR_q&sslmode=require
+    url: ${db.url}
     username: ${db.username}
     password: ${db.password}
   jpa:
