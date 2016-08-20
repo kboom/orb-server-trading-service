@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import static com.jayway.restassured.RestAssured.given
 import static com.jayway.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath
 
-class GetTradesIntegrationTest extends AbstractIntegrationTest {
+class GetTradesIntegrationTest extends FullIntegrationTest {
 
     @Autowired
     TestDataLoader testDataLoader

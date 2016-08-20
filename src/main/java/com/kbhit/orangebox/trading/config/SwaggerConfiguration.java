@@ -1,4 +1,4 @@
-package com.kbhit.orangebox.trading;
+package com.kbhit.orangebox.trading.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

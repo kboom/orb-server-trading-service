@@ -1,16 +1,16 @@
 package com.kbhit.orangebox.trading;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kbhit.orangebox.trading.domain.Item;
 import com.kbhit.orangebox.trading.domain.Bid;
 import com.kbhit.orangebox.trading.domain.Bidder;
-import com.kbhit.orangebox.trading.domain.Item;
 import com.kbhit.orangebox.trading.domain.Trade;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MappingsTest extends IntegrationTest {
+public class MappingsTest extends SpockIntegrationTest {
 
     @Autowired
     private ObjectMapper objectMapper;

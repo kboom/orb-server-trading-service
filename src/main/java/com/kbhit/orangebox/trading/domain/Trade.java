@@ -23,6 +23,14 @@ public class Trade {
     @ManyToOne
     private Bid latestBid;
 
+    @OneToOne
+    private Bid initialBid;
 
+    public Bid getInitialBid() {
+        return initialBid;
+    }
 
+    public Bid getLatestBid() {
+        return latestBid;
+    }
 }
