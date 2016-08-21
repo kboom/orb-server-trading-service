@@ -33,4 +33,9 @@ public class Trade {
     public Bid getLatestBid() {
         return latestBid;
     }
+
+    public boolean isActive() {
+        return true;
+    }
+
 }

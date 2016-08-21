@@ -1,11 +1,12 @@
-package com.kbhit.orangebox.trading
+package com.kbhit.orangebox.trading.rest
 
+import com.kbhit.orangebox.trading.TestDataLoader
 import org.springframework.beans.factory.annotation.Autowired
 
 import static com.jayway.restassured.RestAssured.given
 import static com.jayway.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath
 
-class GetTradesIntegrationTest extends FullIntegrationTest {
+class GetTradesRestTest extends RestTest {
 
     @Autowired
     TestDataLoader testDataLoader

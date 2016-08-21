@@ -28,4 +28,8 @@ public class ItemId implements Serializable {
         this.id = id;
     }
 
+    public static ItemId itemId(String id) {
+        return new ItemId(id);
+    }
+
 }

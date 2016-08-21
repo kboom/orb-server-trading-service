@@ -15,4 +15,7 @@ public class Item {
 
     private String name;
 
+    public ItemId getId() {
+        return id;
+    }
 }

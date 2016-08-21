@@ -1,13 +1,12 @@
-package com.kbhit.orangebox.trading;
+package com.kbhit.orangebox.trading.behaviour;
 
-import org.junit.runner.RunWith;
+import com.kbhit.orangebox.trading.TradingApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import spock.lang.Specification;
 
-@RunWith(SpringRunner.class)
 @ActiveProfiles("dev")
 @SpringBootTest(classes = TradingApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-public abstract class SpockIntegrationTest {
+public abstract class BehaviourSpecification extends Specification {
 
 }
