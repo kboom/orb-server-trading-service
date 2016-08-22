@@ -2,7 +2,6 @@ package com.kbhit.orangebox.trading.behaviour.bidding
 
 import com.kbhit.orangebox.trading.behaviour.BehaviourSpecification
 import com.kbhit.orangebox.trading.domain.Bid
-
 import com.kbhit.orangebox.trading.domain.Trade
 import com.kbhit.orangebox.trading.domain.service.BiddingService
 import com.kbhit.orangebox.trading.domain.service.StorageService
