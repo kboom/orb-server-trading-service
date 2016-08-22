@@ -17,6 +17,7 @@ buildscript {
 
 apply plugin: 'orb-service'
 apply plugin: 'java'
+apply plugin: "groovy"
 apply plugin: 'idea'
 
 sourceCompatibility = 1.8
@@ -49,7 +50,6 @@ dependencies {
     compile 'org.hibernate:hibernate-core:5.2.1.Final'
     compile group: 'com.h2database', name: 'h2', version: '1.4.192'
     compile group: 'postgresql', name: 'postgresql', version: '9.1-901-1.jdbc4'
-    testCompile 'org.codehaus.groovy:groovy-all:2.4.4'
     testCompile group: 'com.ninja-squad', name: 'DbSetup', version: '2.1.0'
     testCompile group: 'org.spockframework', name: 'spock-spring', version: '1.0-groovy-2.4'
     testCompile group: 'org.spockframework', name: 'spock-core', version: '1.0-groovy-2.4'

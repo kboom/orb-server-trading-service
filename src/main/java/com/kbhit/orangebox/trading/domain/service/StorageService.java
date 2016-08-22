@@ -11,7 +11,7 @@ import java.util.List;
 @FeignClient("orb-storage")
 public interface StorageService {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/stores")
-    List<Item> getItemsById(@PathVariable List<String> itemIds);
+    @RequestMapping(method = RequestMethod.GET, value = "/items/{itemIds}")
+    List<Item> getItemsById(@PathVariable("itemIds") List<String> itemIds);
 
 }
