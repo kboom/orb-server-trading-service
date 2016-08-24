@@ -6,7 +6,7 @@ import com.kbhit.orangebox.trading.controllers.dto.ItemDto;
 import com.kbhit.orangebox.trading.domain.Bid;
 import com.kbhit.orangebox.trading.domain.Item;
 import com.kbhit.orangebox.trading.domain.Trade;
-import com.kbhit.orangebox.trading.domain.UserContextService;
+import com.kbhit.orangebox.trading.domain.service.BiddingContextService;
 import com.kbhit.orangebox.trading.domain.service.BiddingService;
 import com.kbhit.orangebox.trading.domain.service.StorageService;
 import com.kbhit.orangebox.trading.domain.service.TimeService;
@@ -37,7 +37,7 @@ public class BiddingController {
     private TimeService timeService;
 
     @Autowired
-    private UserContextService userContextService;
+    private BiddingContextService userContextService;
 
     @Autowired
     private Mapper mapper;

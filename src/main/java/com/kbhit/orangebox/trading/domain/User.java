@@ -1,12 +1,12 @@
 package com.kbhit.orangebox.trading.domain;
 
 import java.util.List;
-import java.util.stream.StreamSupport;
 
 public class User {
     private List<Authority> authorities;
     private boolean activated;
     private String password;
+    private String username;
 
     public boolean getActivated() {
         return activated;
@@ -18,5 +18,9 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getLogin() {
+        return username;
     }
 }

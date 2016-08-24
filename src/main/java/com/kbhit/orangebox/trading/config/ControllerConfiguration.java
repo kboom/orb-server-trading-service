@@ -1,5 +1,7 @@
 package com.kbhit.orangebox.trading.config;
 
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +30,11 @@ public class ControllerConfiguration {
         config.addAllowedMethod("PATCH");
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
+    }
+
+    @Bean(name = "org.dozer.Mapper")
+    public DozerBeanMapper dozerBean() {
+        return new DozerBeanMapper();
     }
 
 }
