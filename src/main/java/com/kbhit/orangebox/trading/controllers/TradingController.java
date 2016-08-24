@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
 @RestController
 public class TradingController {
 
@@ -23,12 +21,14 @@ public class TradingController {
     private TradeRepository tradeRepository;
 
     @ApiOperation(value = "getSingleTrade")
-    @RequestMapping(value = "/trades/{tradeId}", produces = APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/trades/{tradeId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @Secured(AuthoritiesConstants.USER)
     public ResponseEntity<TradeDto> getTrade(@PathVariable String tradeId) {
 //        Trade trade = tradeRepository.findTradeById(referenceTrade(tradeId));
-        return new ResponseEntity<>(new TradeDto(), HttpStatus.OK);
+        TradeDto tradeDto = new TradeDto();
+        tradeDto.setId("214");
+        return new ResponseEntity<>(tradeDto, HttpStatus.OK);
     }
 
 }

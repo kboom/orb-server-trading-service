@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MappingsTest extends BehaviourSpecification {
+public class MappingsTest extends IntegrationTest {
 
     @Autowired
     private ObjectMapper objectMapper;
