@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableEurekaClient
-@EnableFeignClients
-@ConditionalOnProperty("eureka.client.enabled")
+@EnableFeignClients(basePackages = "com.kbhit.orangebox.trading.domain.service")
+//@ConditionalOnProperty("eureka.client.enabled")
 public class EurekaConfiguration {
 
 }

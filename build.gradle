@@ -53,6 +53,8 @@ dependencies {
     compile group: 'net.sf.dozer', name: 'dozer', version: '5.5.1'
     compile group: 'joda-time', name: 'joda-time', version: '2.9.4'
     compile group: 'joda-time', name: 'joda-time-hibernate', version: '1.4'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'io.jsonwebtoken:jjwt:0.6.0'
 
 
 
