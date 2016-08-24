@@ -1,5 +1,9 @@
 package com.kbhit.orangebox.trading.domain;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+import org.joda.time.ReadableDateTime;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
@@ -16,7 +20,9 @@ public class Bid {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bid_seq")
     private Long id;
 
-    private Date placeDate;
+    @Column
+    @Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
+    private DateTime placeDate;
 
     @ManyToOne
     private Bidder bidder;
@@ -27,7 +33,9 @@ public class Bid {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "id")
     private Set<Item> requestedItems;
 
-    Bid() {}
+    Bid() {
+
+    }
 
     public static BidBuilder buildBid() {
         return new BidBuilder();
@@ -39,6 +47,18 @@ public class Bid {
 
         BidBuilder() {
             bid = new Bid();
+            bid.offeredItems = newHashSet();
+            bid.requestedItems = newHashSet();
+        }
+
+        public BidBuilder withPlaceDate(ReadableDateTime dateTime) {
+            bid.placeDate = new DateTime(dateTime);
+            return this;
+        }
+
+        public BidBuilder withBidder(Bidder bidder) {
+            bid.bidder = bidder;
+            return this;
         }
 
         public BidBuilder withRequestedItems(Collection<Item> items) {

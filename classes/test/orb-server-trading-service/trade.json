@@ -1,0 +1,45 @@
+{
+  "path" : "trading/trade/123",
+  "payload": {
+    "id" : 123,
+    "createDate" : 1471548111578,
+    "updateDate" : 1471548971578,
+    "requester" : {
+      "id" : 93882,
+      "login" : "ggurgul",
+      "firstName" : "Grzegorz",
+      "lastName" : "Gurgul"
+    },
+    "responder" : {
+      "id" : 82773,
+      "login" : "anowakiewicz",
+      "firstName" : "Agata",
+      "lastName" : "Nowakiewicz"
+    },
+    "latestBid" : {
+      "placeDate" : 1471548971578,
+      "bidder" : {
+        "id" : 82773,
+        "login" : "anowakiewicz",
+        "firstName" : "Agata",
+        "lastName" : "Nowakiewicz"
+      },
+      "offeredItems" : [
+        {
+          "id" : 882929,
+          "name" : "Red big ball"
+        },
+        {
+          "id" : 837722,
+          "name" : "Diamond"
+        }
+      ],
+      "requestedItems" : [
+        {
+          "id" : 999332,
+          "name" : "Black belt"
+        }
+      ]
+    }
+  }
+}
