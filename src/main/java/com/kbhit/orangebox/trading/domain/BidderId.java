@@ -28,7 +28,7 @@ public class BidderId implements Serializable {
         return id != null ? id.hashCode() : 0;
     }
 
-    public static BidderId bidderId(String id) {
+    public static BidderId referenceBidder(String id) {
         return new BidderId(id);
     }
 

@@ -25,6 +25,9 @@ public class Bid {
     private DateTime placeDate;
 
     @ManyToOne
+    private Trade trade;
+
+    @ManyToOne
     private Bidder bidder;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "id")

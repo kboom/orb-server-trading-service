@@ -1,7 +1,7 @@
 package com.kbhit.orangebox.trading.config;
 
-import com.kbhit.orangebox.trading.domain.service.StorageService;
-import com.kbhit.orangebox.trading.mocks.MockedStorageService;
+import com.kbhit.orangebox.trading.mocks.ItemServiceStubber;
+import feign.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Configuration;
 public class StandaloneConfig {
 
     @Bean
-    public StorageService storageService() {
-        return new MockedStorageService();
+    public ItemServiceStubber itemServiceStubber() {
+        return new ItemServiceStubber();
     }
 
 }

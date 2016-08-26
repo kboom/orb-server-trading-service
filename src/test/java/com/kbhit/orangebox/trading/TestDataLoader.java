@@ -1,5 +1,6 @@
 package com.kbhit.orangebox.trading;
 
+import com.kbhit.orangebox.trading.dbsetup.TestDataSet;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.destination.DataSourceDestination;
 import org.springframework.beans.factory.annotation.Autowired;

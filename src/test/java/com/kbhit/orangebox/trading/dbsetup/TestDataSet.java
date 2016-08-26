@@ -1,8 +1,10 @@
-package com.kbhit.orangebox.trading;
+package com.kbhit.orangebox.trading.dbsetup;
 
+import com.kbhit.orangebox.trading.dbsetup.tables.TradeTable;
 import com.ninja_squad.dbsetup.Operations;
 import com.ninja_squad.dbsetup.operation.Operation;
 
+import static com.kbhit.orangebox.trading.dbsetup.data.OngoingTrade.ONGOING_TRADE_ID;
 import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
 import static com.ninja_squad.dbsetup.Operations.insertInto;
 import static com.ninja_squad.dbsetup.operation.CompositeOperation.sequenceOf;
@@ -10,7 +12,8 @@ import static com.ninja_squad.dbsetup.operation.CompositeOperation.sequenceOf;
 public class TestDataSet {
 
     public static final Operation INSERT_TRADE_RESOURCES =
-            sequenceOf();
+            sequenceOf(insertInto("TRADES").columns(TradeTable.allColumns())
+                    .values(ONGOING_TRADE_ID).build());
 
     public static final Operation DELETE_BIDS = deleteAllFrom("BIDS");
     public static final Operation DELETE_TRADES = deleteAllFrom("TRADES");
@@ -18,4 +21,5 @@ public class TestDataSet {
     public static final Operation DELETE_ITEMS = deleteAllFrom("ITEMS");
 
     public static final Operation DELETE_ALL_DATA = Operations.sequenceOf(DELETE_TRADES, DELETE_BIDS, DELETE_ITEMS, DELETE_BIDDERS);
+
 }

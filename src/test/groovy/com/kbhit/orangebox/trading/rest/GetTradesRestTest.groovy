@@ -1,6 +1,8 @@
 package com.kbhit.orangebox.trading.rest
 
 import com.kbhit.orangebox.trading.TestDataLoader
+import com.kbhit.orangebox.trading.controllers.dto.ItemDto
+import com.kbhit.orangebox.trading.mocks.ItemServiceStubber
 import com.kbhit.orangebox.trading.security.AuthoritiesConstants
 import com.kbhit.orangebox.trading.security.jwt.TokenProvider
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,8 +21,13 @@ class GetTradesRestTest extends RestTest {
     @Autowired
     TokenProvider tokenProvider
 
+    @Autowired
+    ItemServiceStubber itemServiceStubber;
+
     def setup() {
-        testDataLoader.reloadTestData()
+//        testDataLoader.reloadTestData()
+        itemServiceStubber.start();
+        itemServiceStubber.mockItem(new ItemDto())
     }
 
     def "Gets single trade"() {
