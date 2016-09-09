@@ -6,10 +6,10 @@ import java.io.Serializable;
 @Embeddable
 public class BidderId implements Serializable {
 
-    private String id;
+    private String bidderId;
 
-    BidderId(String id) {
-        this.id = id;
+    private BidderId(String bidderId) {
+        this.bidderId = bidderId;
     }
 
     @Override
@@ -19,17 +19,21 @@ public class BidderId implements Serializable {
 
         BidderId bidderId = (BidderId) o;
 
-        return id != null ? id.equals(bidderId.id) : bidderId.id == null;
+        return this.bidderId != null ? this.bidderId.equals(bidderId.bidderId) : bidderId.bidderId == null;
 
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return bidderId != null ? bidderId.hashCode() : 0;
     }
 
     public static BidderId referenceBidder(String id) {
         return new BidderId(id);
+    }
+
+    @SuppressWarnings("unused")
+    BidderId() {
     }
 
 }

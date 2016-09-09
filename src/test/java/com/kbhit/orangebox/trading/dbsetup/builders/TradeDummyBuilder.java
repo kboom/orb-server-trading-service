@@ -5,6 +5,7 @@ import com.kbhit.orangebox.trading.domain.TradeId;
 import com.ninja_squad.dbsetup.operation.Operation;
 import org.joda.time.ReadableDateTime;
 
+import java.sql.Timestamp;
 import java.util.TreeMap;
 
 import static com.kbhit.orangebox.trading.dbsetup.tables.TradeTable.*;
@@ -14,18 +15,18 @@ public class TradeDummyBuilder {
 
     private TreeMap<String, Object> orderedValuesMap = new TreeMap<>();
 
-    public TradeDummyBuilder withId(TradeId tradeId) {
+    public TradeDummyBuilder withId(String tradeId) {
         orderedValuesMap.put(TRADE_ID.getColumnName(), tradeId);
         return this;
     }
 
     public TradeDummyBuilder withCreateDate(ReadableDateTime createDate) {
-        orderedValuesMap.put(CREATE_DATE.getColumnName(), createDate);
+        orderedValuesMap.put(CREATE_DATE.getColumnName(), new Timestamp(createDate.getMillis()));
         return this;
     }
 
     public TradeDummyBuilder withUpdateDate(ReadableDateTime updateDate) {
-        orderedValuesMap.put(UPDATE_DATE.getColumnName(), updateDate);
+        orderedValuesMap.put(UPDATE_DATE.getColumnName(), new Timestamp(updateDate.getMillis()));
         return this;
     }
 
@@ -39,12 +40,12 @@ public class TradeDummyBuilder {
         return this;
     }
 
-    public TradeDummyBuilder withRequester(BidderId requester) {
+    public TradeDummyBuilder withRequester(String requester) {
         orderedValuesMap.put(REQUESTER_ID.getColumnName(), requester);
         return this;
     }
 
-    public TradeDummyBuilder withResponder(BidderId responder) {
+    public TradeDummyBuilder withResponder(String responder) {
         orderedValuesMap.put(RESPONDER_ID.getColumnName(), responder);
         return this;
     }
@@ -52,7 +53,7 @@ public class TradeDummyBuilder {
     public Operation build() {
         return insertInto("TRADES")
                 .columns(orderedValuesMap.keySet().stream().toArray(String[]::new))
-                .values(orderedValuesMap.values()).build();
+                .values(orderedValuesMap.values().stream().toArray(Object[]::new)).build();
     }
 
     public static TradeDummyBuilder aDummyTrade() {

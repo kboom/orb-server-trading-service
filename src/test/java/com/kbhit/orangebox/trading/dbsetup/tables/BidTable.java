@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 public enum BidTable {
 
-    BID_ID("ID"),
-    PLACE_DATE("CREATE_DATE"),
-    BIDDER_ID("UPDATE_DATE"),
-    TRADE_ID("INITIAL_BID_ID");
+    BID_ID("BID_ID"),
+    PLACE_DATE("PLACE_DATE"),
+    BIDDER_ID("BIDDER_ID"),
+    TRADE_ID("TRADE_ID");
 
     String columnName;
 

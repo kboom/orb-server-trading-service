@@ -1,10 +1,9 @@
 package com.kbhit.orangebox.trading.dbsetup.builders;
 
-import com.kbhit.orangebox.trading.domain.BidderId;
-import com.kbhit.orangebox.trading.domain.TradeId;
 import com.ninja_squad.dbsetup.operation.Operation;
 import org.joda.time.ReadableDateTime;
 
+import java.sql.Timestamp;
 import java.util.TreeMap;
 
 import static com.kbhit.orangebox.trading.dbsetup.tables.BidTable.*;
@@ -20,16 +19,16 @@ public class BidDummyBuilder {
     }
 
     public BidDummyBuilder withPlaceDate(ReadableDateTime dateTime) {
-        orderedValuesMap.put(PLACE_DATE.getColumnName(), dateTime);
+        orderedValuesMap.put(PLACE_DATE.getColumnName(), new Timestamp(dateTime.getMillis()));
         return this;
     }
 
-    public BidDummyBuilder withBidderId(BidderId bidderId) {
+    public BidDummyBuilder withBidderId(String bidderId) {
         orderedValuesMap.put(BIDDER_ID.getColumnName(), bidderId);
         return this;
     }
 
-    public BidDummyBuilder withTradeId(TradeId tradeId) {
+    public BidDummyBuilder withTradeId(String tradeId) {
         orderedValuesMap.put(TRADE_ID.getColumnName(), tradeId);
         return this;
     }
@@ -37,7 +36,7 @@ public class BidDummyBuilder {
     public Operation build() {
         return insertInto("BIDS")
                 .columns(orderedValuesMap.keySet().stream().toArray(String[]::new))
-                .values(orderedValuesMap.values()).build();
+                .values(orderedValuesMap.values().stream().toArray(Object[]::new)).build();
     }
 
     public static BidDummyBuilder aDummyBid() {

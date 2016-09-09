@@ -17,19 +17,22 @@ public class Trade {
     private Date updateDate;
 
     @OneToOne
+    @JoinColumn(name = "requester_id")
     private Bidder requester;
 
     @OneToOne
+    @JoinColumn(name = "responder_id")
     private Bidder responder;
 
-    @ManyToOne
+    @OneToOne
+    @JoinColumn(name = "latest_bid_id")
     private Bid latestBid;
 
     @OneToOne
+    @JoinColumn(name = "initial_bid_id")
     private Bid initialBid;
 
-    @OneToMany
-    @JoinColumn(name = "trade")
+    @OneToMany(mappedBy = "trade")
     private List<Bid> historicBids;
 
     public Bid getInitialBid() {

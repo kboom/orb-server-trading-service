@@ -6,7 +6,11 @@ import java.io.Serializable;
 @Embeddable
 public class ItemId implements Serializable {
 
-    private String id;
+    private String itemId;
+
+    private ItemId(String itemId) {
+        this.itemId = itemId;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -15,21 +19,21 @@ public class ItemId implements Serializable {
 
         ItemId itemId = (ItemId) o;
 
-        return id != null ? id.equals(itemId.id) : itemId.id == null;
+        return this.itemId != null ? this.itemId.equals(itemId.itemId) : itemId.itemId == null;
 
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
-    }
-
-    ItemId(String id) {
-        this.id = id;
+        return itemId != null ? itemId.hashCode() : 0;
     }
 
     public static ItemId itemId(String id) {
         return new ItemId(id);
+    }
+
+    @SuppressWarnings("unused")
+    public ItemId() {
     }
 
 }

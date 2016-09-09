@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum TradeTable {
 
-    TRADE_ID("ID"),
+    TRADE_ID("TRADE_ID"),
     CREATE_DATE("CREATE_DATE"),
     UPDATE_DATE("UPDATE_DATE"),
     INITIAL_BID_ID("INITIAL_BID_ID"),

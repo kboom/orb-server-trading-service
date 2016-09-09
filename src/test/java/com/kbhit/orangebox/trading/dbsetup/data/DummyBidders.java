@@ -1,17 +1,15 @@
 package com.kbhit.orangebox.trading.dbsetup.data;
 
-import com.kbhit.orangebox.trading.domain.BidderId;
 import com.ninja_squad.dbsetup.Operations;
 import com.ninja_squad.dbsetup.operation.Operation;
 
 import static com.kbhit.orangebox.trading.dbsetup.builders.BidderDummyBuilder.aDummyBidder;
-import static com.kbhit.orangebox.trading.domain.BidderId.referenceBidder;
 
 public class DummyBidders {
 
-    public static final BidderId GRZEGORZ_BIDDER_ID = referenceBidder("grzegorz");
+    static final String GRZEGORZ_BIDDER_ID = "grzegorz";
 
-    public static final BidderId AGATA_BIDDER_ID = referenceBidder("agata");
+    static final String AGATA_BIDDER_ID = "agata";
 
 
     private static final Operation AGATA_BIDDER = aDummyBidder()

@@ -12,7 +12,7 @@ public class BidderDummyBuilder {
 
     private TreeMap<String, Object> orderedValuesMap = new TreeMap<>();
 
-    public BidderDummyBuilder withId(BidderId bidderId) {
+    public BidderDummyBuilder withId(String bidderId) {
         orderedValuesMap.put(BIDDER_ID.getColumnName(), bidderId);
         return this;
     }
@@ -35,7 +35,7 @@ public class BidderDummyBuilder {
     public Operation build() {
         return insertInto("BIDDERS")
                 .columns(orderedValuesMap.keySet().stream().toArray(String[]::new))
-                .values(orderedValuesMap.values()).build();
+                .values(orderedValuesMap.values().stream().toArray(Object[]::new)).build();
     }
 
     public static BidderDummyBuilder aDummyBidder() {

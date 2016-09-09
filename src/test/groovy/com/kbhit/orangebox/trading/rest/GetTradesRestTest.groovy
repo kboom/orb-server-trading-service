@@ -1,6 +1,6 @@
 package com.kbhit.orangebox.trading.rest
 
-import com.kbhit.orangebox.trading.TestDataLoader
+import com.kbhit.orangebox.trading.dbsetup.DbSetupTestDataLoader
 import com.kbhit.orangebox.trading.controllers.dto.ItemDto
 import com.kbhit.orangebox.trading.mocks.ItemServiceStubber
 import com.kbhit.orangebox.trading.security.AuthoritiesConstants
@@ -16,7 +16,7 @@ import static com.jayway.restassured.module.jsv.JsonSchemaValidator.matchesJsonS
 class GetTradesRestTest extends RestTest {
 
     @Autowired
-    TestDataLoader testDataLoader
+    DbSetupTestDataLoader testDataLoader
 
     @Autowired
     TokenProvider tokenProvider
@@ -25,13 +25,15 @@ class GetTradesRestTest extends RestTest {
     ItemServiceStubber itemServiceStubber;
 
     def setup() {
-//        testDataLoader.reloadTestData()
+        testDataLoader.reloadTestData()
         itemServiceStubber.start();
         itemServiceStubber.mockItem(new ItemDto())
     }
 
     def "Gets single trade"() {
         given:
+        testDataLoader.createDummyBidders();
+        testDataLoader.createDummyTrade();
         def token = tokenProvider.createToken(new TestingAuthenticationToken("me", "abc", newArrayList(new SimpleGrantedAuthority(AuthoritiesConstants.USER))), false)
         def request = given().accept("application/json").header("Authorization", "Bearer " + token)
 

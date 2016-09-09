@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum BidderTable {
 
-    BIDDER_ID("ID"),
+    BIDDER_ID("BIDDER_ID"),
     FIRST_NAME("FIRST_NAME"),
     LAST_NAME("LAST_NAME"),
     LOGIN("LOGIN");

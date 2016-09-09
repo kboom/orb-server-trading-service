@@ -6,10 +6,10 @@ import java.io.Serializable;
 @Embeddable
 public class TradeId implements Serializable {
 
-    private String id;
+    private String tradeId;
 
-    TradeId(String id) {
-        this.id = id;
+    private TradeId(String tradeId) {
+        this.tradeId = tradeId;
     }
 
     @Override
@@ -19,13 +19,17 @@ public class TradeId implements Serializable {
 
         TradeId tradeId = (TradeId) o;
 
-        return id != null ? id.equals(tradeId.id) : tradeId.id == null;
+        return this.tradeId != null ? this.tradeId.equals(tradeId.tradeId) : tradeId.tradeId == null;
 
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return tradeId != null ? tradeId.hashCode() : 0;
+    }
+
+    @SuppressWarnings("unused")
+    TradeId() {
     }
 
     public static TradeId referenceTrade(String id) {

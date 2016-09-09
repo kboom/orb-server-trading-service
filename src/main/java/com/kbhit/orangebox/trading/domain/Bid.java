@@ -6,7 +6,6 @@ import org.joda.time.ReadableDateTime;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Set;
 
 import static com.google.common.collect.Sets.newHashSet;
@@ -18,16 +17,18 @@ public class Bid {
     @Id
     @SequenceGenerator(name = "bid_seq", initialValue = 10000, allocationSize = 100)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bid_seq")
-    private Long id;
+    private Long bidId;
 
     @Column
-    @Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
     private DateTime placeDate;
 
     @ManyToOne
+    @JoinColumn(name = "trade_id")
     private Trade trade;
 
     @ManyToOne
+    @JoinColumn(name = "bidder_id")
     private Bidder bidder;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "id")

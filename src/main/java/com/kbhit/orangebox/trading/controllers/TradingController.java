@@ -1,6 +1,5 @@
 package com.kbhit.orangebox.trading.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kbhit.orangebox.trading.controllers.dto.TradeDto;
 import com.kbhit.orangebox.trading.domain.Trade;
 import com.kbhit.orangebox.trading.domain.repository.TradeRepository;

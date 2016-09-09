@@ -1,24 +1,11 @@
 package com.kbhit.orangebox.trading;
 
-import com.kbhit.orangebox.trading.dbsetup.TestDataSet;
-import com.ninja_squad.dbsetup.DbSetup;
-import com.ninja_squad.dbsetup.destination.DataSourceDestination;
-import org.springframework.beans.factory.annotation.Autowired;
+public interface TestDataLoader {
 
-import javax.sql.DataSource;
+    void reloadTestData();
 
-import static com.ninja_squad.dbsetup.operation.CompositeOperation.sequenceOf;
+    void createDummyTrade();
 
-public class TestDataLoader {
-
-    @Autowired
-    private DataSource dataSource;
-
-    public void reloadTestData() {
-        DataSourceDestination dataSourceDestination = new DataSourceDestination(dataSource);
-        DbSetup dbSetup = new DbSetup(dataSourceDestination,
-                sequenceOf(TestDataSet.DELETE_ALL_DATA, TestDataSet.INSERT_TRADE_RESOURCES));
-        dbSetup.launch();
-    }
+    void createDummyBidders();
 
 }
