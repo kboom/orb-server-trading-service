@@ -5,7 +5,11 @@ spring:
     config:
       failFast: true
       uri: ${ORANGEBOX_CONFIG_SERVER_URI:http://localhost:8888}
-
+  jpa:
+    properties:
+      jadira:
+        usertype:
+          autoRegisterUserTypes: true
 ---
 spring:
   profiles: dev

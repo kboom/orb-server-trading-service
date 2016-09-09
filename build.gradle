@@ -49,6 +49,7 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
     compile 'org.springframework.cloud:spring-cloud-starter-feign'
     compile 'org.hibernate:hibernate-core:5.2.1.Final'
+    compile 'org.jadira.usertype:usertype.core:6.0.0.GA'
     compile group: 'com.h2database', name: 'h2', version: '1.4.192'
     compile group: 'postgresql', name: 'postgresql', version: '9.1-901-1.jdbc4'
     compile group: 'net.sf.dozer', name: 'dozer', version: '5.5.1'

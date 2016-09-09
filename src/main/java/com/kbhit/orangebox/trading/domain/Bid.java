@@ -1,6 +1,5 @@
 package com.kbhit.orangebox.trading.domain;
 
-import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.ReadableDateTime;
 
@@ -20,7 +19,6 @@ public class Bid {
     private Long bidId;
 
     @Column
-    @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
     private DateTime placeDate;
 
     @ManyToOne

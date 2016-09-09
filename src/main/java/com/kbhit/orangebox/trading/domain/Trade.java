@@ -1,7 +1,8 @@
 package com.kbhit.orangebox.trading.domain;
 
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,9 +13,9 @@ public class Trade {
     @EmbeddedId
     private TradeId id;
 
-    private Date createDate;
+    private DateTime createDate;
 
-    private Date updateDate;
+    private DateTime updateDate;
 
     @OneToOne
     @JoinColumn(name = "requester_id")
