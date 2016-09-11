@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import static com.google.common.collect.Lists.newArrayList
 import static com.jayway.restassured.RestAssured.given
 import static com.jayway.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath
+import static org.hamcrest.Matchers.containsInAnyOrder
 import static org.hamcrest.core.IsEqual.equalTo
 
 class GetTradesRestTest extends RestTest {
@@ -37,7 +38,9 @@ class GetTradesRestTest extends RestTest {
         then:
         response.then().statusCode(200)
                 .body(matchesJsonSchemaInClasspath("trade.json"))
-                .body("id", equalTo("1"));
+                .body("id", equalTo("1"))
+                .body("initialBid.requestedItems", containsInAnyOrder("abc"))
+                .body("initialBid.offeredItems", containsInAnyOrder("abc"));
     }
 
 }

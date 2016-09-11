@@ -73,6 +73,8 @@ public class Trade {
 
         public TradeBuilder withInitialBid(Bid initialBid) {
             trade.initialBid = initialBid;
+            trade.latestBid = initialBid;
+            trade.historicBids.add(initialBid);
             return this;
         }
 

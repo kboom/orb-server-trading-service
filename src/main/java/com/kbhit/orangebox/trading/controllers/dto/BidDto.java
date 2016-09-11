@@ -35,4 +35,23 @@ public class BidDto {
         return this;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BidDto bidDto = (BidDto) o;
+
+        if (requestedItems != null ? !requestedItems.equals(bidDto.requestedItems) : bidDto.requestedItems != null)
+            return false;
+        return offeredItems != null ? offeredItems.equals(bidDto.offeredItems) : bidDto.offeredItems == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = requestedItems != null ? requestedItems.hashCode() : 0;
+        result = 31 * result + (offeredItems != null ? offeredItems.hashCode() : 0);
+        return result;
+    }
 }
