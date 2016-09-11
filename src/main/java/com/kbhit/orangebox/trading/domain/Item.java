@@ -10,7 +10,7 @@ public class Item {
     private ItemId id;
 
     @ManyToOne
-    @JoinColumn(name = "bidId")
+    @JoinColumn(referencedColumnName = "bid_id")
     private Bid bid;
 
     private String name;

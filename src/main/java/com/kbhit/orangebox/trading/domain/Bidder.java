@@ -17,4 +17,19 @@ public class Bidder {
 
     private String lastName;
 
+    public BidderId getId() {
+        return id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
 }

@@ -39,6 +39,8 @@ class GetTradesRestTest extends RestTest {
         response.then().statusCode(200)
                 .body(matchesJsonSchemaInClasspath("trade.json"))
                 .body("id", equalTo("1"))
+                .body("requester.login", equalTo("aaagacia"))
+                .body("responder.login", equalTo("kbhit"))
                 .body("initialBid.requestedItems", containsInAnyOrder("abc"))
                 .body("initialBid.offeredItems", containsInAnyOrder("abc"));
     }

@@ -1,8 +1,8 @@
 package com.kbhit.orangebox.trading.dbsetup;
 
 import com.kbhit.orangebox.trading.TestDataLoader;
-import com.kbhit.orangebox.trading.dbsetup.data.DummyBidders;
-import com.kbhit.orangebox.trading.dbsetup.data.OngoingTrade;
+import com.kbhit.orangebox.trading.dbsetup.data.InsertDummyBidders;
+import com.kbhit.orangebox.trading.dbsetup.data.InsertOngoingTrade;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.destination.DataSourceDestination;
 import com.ninja_squad.dbsetup.operation.Operation;
@@ -24,12 +24,12 @@ public final class DbSetupTestDataLoader implements TestDataLoader {
 
     @Override
     public void createDummyTrade() {
-        launchSequence(OngoingTrade.get());
+        launchSequence(InsertOngoingTrade.insertAll());
     }
 
     @Override
     public void createDummyBidders() {
-        launchSequence(DummyBidders.getAll());
+        launchSequence(InsertDummyBidders.insertAll());
     }
 
     private void launchSequence(Operation... operations) {

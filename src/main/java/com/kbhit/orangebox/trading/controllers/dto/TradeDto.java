@@ -6,6 +6,10 @@ public class TradeDto {
 
     private String id;
 
+    private BidderDto requester;
+
+    private BidderDto responder;
+
     private BidDto initialBid;
 
     private BidDto latestBid;
@@ -42,5 +46,21 @@ public class TradeDto {
 
     public void setHistoricBids(List<BidDto> historicBids) {
         this.historicBids = historicBids;
+    }
+
+    public BidderDto getRequester() {
+        return requester;
+    }
+
+    public void setRequester(BidderDto requester) {
+        this.requester = requester;
+    }
+
+    public BidderDto getResponder() {
+        return responder;
+    }
+
+    public void setResponder(BidderDto responder) {
+        this.responder = responder;
     }
 }

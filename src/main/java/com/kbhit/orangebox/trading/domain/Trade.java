@@ -63,6 +63,22 @@ public class Trade {
         return true;
     }
 
+    public DateTime getCreateDate() {
+        return createDate;
+    }
+
+    public DateTime getUpdateDate() {
+        return updateDate;
+    }
+
+    public Bidder getRequester() {
+        return requester;
+    }
+
+    public Bidder getResponder() {
+        return responder;
+    }
+
     public static class TradeBuilder {
 
         private Trade trade;

@@ -5,7 +5,7 @@ import com.ninja_squad.dbsetup.operation.Operation;
 
 import static com.kbhit.orangebox.trading.dbsetup.builders.BidderDummyBuilder.aDummyBidder;
 
-public class DummyBidders {
+public class InsertDummyBidders {
 
     static final String GRZEGORZ_BIDDER_ID = "grzegorz";
 
@@ -26,7 +26,7 @@ public class DummyBidders {
             .withLogin("kbhit")
             .build();
 
-    public static Operation getAll() {
+    public static Operation insertAll() {
         return Operations.sequenceOf(AGATA_BIDDER, GRZEGORZ_BIDDER);
     }
 
