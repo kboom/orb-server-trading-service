@@ -36,4 +36,8 @@ public class TradeId implements Serializable {
         return new TradeId(id);
     }
 
+    public String rawValue() {
+        return tradeId;
+    }
+
 }

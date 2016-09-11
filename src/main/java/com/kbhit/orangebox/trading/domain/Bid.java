@@ -5,9 +5,11 @@ import org.joda.time.ReadableDateTime;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Set;
 
 import static com.google.common.collect.Sets.newHashSet;
+import static java.util.Collections.unmodifiableSet;
 
 @Entity
 @Table(name = "BIDS")
@@ -35,6 +37,28 @@ public class Bid {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "id")
     private Set<Item> requestedItems;
 
+
+    public DateTime getPlaceDate() {
+        return placeDate;
+    }
+
+    public Trade getTrade() {
+        return trade;
+    }
+
+    public Bidder getBidder() {
+        return bidder;
+    }
+
+    public Set<Item> getOfferedItems() {
+        return unmodifiableSet(offeredItems);
+    }
+
+    public Set<Item> getRequestedItems() {
+        return unmodifiableSet(requestedItems);
+    }
+
+    @SuppressWarnings("unused")
     Bid() {
 
     }
@@ -64,12 +88,12 @@ public class Bid {
         }
 
         public BidBuilder withRequestedItems(Collection<Item> items) {
-            bid.offeredItems.addAll(items);
+            bid.requestedItems.addAll(items);
             return this;
         }
 
         public BidBuilder withOfferedItems(Collection<Item> items) {
-            bid.requestedItems.addAll(items);
+            bid.offeredItems.addAll(items);
             return this;
         }
 

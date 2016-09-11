@@ -3,8 +3,10 @@ package com.kbhit.orangebox.trading.domain;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
-import java.util.Collections;
 import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
+import static java.util.Collections.unmodifiableList;
 
 @Entity
 @Table(name = "TRADES")
@@ -16,6 +18,11 @@ public class Trade {
     private DateTime createDate;
 
     private DateTime updateDate;
+
+    public Trade(TradeId id) {
+        this.id = id;
+        this.historicBids = newArrayList();
+    }
 
     @OneToOne
     @JoinColumn(name = "requester_id")
@@ -36,6 +43,10 @@ public class Trade {
     @OneToMany(mappedBy = "trade")
     private List<Bid> historicBids;
 
+    public TradeId getId() {
+        return id;
+    }
+
     public Bid getInitialBid() {
         return initialBid;
     }
@@ -45,11 +56,49 @@ public class Trade {
     }
 
     public List<Bid> getHistoricBids() {
-        return Collections.unmodifiableList(historicBids);
+        return unmodifiableList(historicBids);
     }
 
     public boolean isActive() {
         return true;
+    }
+
+    public static class TradeBuilder {
+
+        private Trade trade;
+
+        private TradeBuilder(TradeId tradeId) {
+            trade = new Trade(tradeId);
+        }
+
+        public TradeBuilder withInitialBid(Bid initialBid) {
+            trade.initialBid = initialBid;
+            return this;
+        }
+
+        public TradeBuilder withRequester(Bidder requester) {
+            trade.requester = requester;
+            return this;
+        }
+
+        public TradeBuilder withResponder(Bidder responder) {
+            trade.responder = responder;
+            return this;
+        }
+
+        public Trade build() {
+            return trade;
+        }
+
+    }
+
+    public static TradeBuilder aTrade(TradeId tradeId) {
+        return new TradeBuilder(tradeId);
+    }
+
+    @SuppressWarnings("unused")
+    Trade() {
+
     }
 
 }

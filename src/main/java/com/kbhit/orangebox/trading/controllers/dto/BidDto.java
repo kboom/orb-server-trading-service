@@ -21,16 +21,18 @@ public class BidDto {
         return requestedItems;
     }
 
-    public void setRequestedItems(Set<ItemDto> requestedItems) {
+    public BidDto setRequestedItems(Set<ItemDto> requestedItems) {
         this.requestedItems = requestedItems;
+        return this;
     }
 
     public Set<ItemDto> getOfferedItems() {
         return offeredItems;
     }
 
-    public void setOfferedItems(Set<ItemDto> offeredItems) {
+    public BidDto setOfferedItems(Set<ItemDto> offeredItems) {
         this.offeredItems = offeredItems;
+        return this;
     }
 
 }

@@ -15,10 +15,16 @@ public class Item {
 
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private Bidder owner;
+
     public ItemId getId() {
         return id;
     }
 
 
-
+    public Bidder getOwner() {
+        return owner;
+    }
 }
