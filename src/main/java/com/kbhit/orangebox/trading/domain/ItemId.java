@@ -36,4 +36,8 @@ public class ItemId implements Serializable {
     public ItemId() {
     }
 
+    public String rawValue() {
+        return itemId;
+    }
+
 }
