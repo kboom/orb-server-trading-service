@@ -32,7 +32,7 @@ public class InsertOngoingTrade {
             .withId(LATEST_BID_ID)
             .withTradeId(ONGOING_TRADE_ID)
             .withPlaceDate(new DateTime("2016-01-04"))
-            .withBidderId(AGATA_BIDDER_ID)
+            .withBidderId(GRZEGORZ_BIDDER_ID)
             .build();
 
     private static final Operation INSERT_TRADE = aDummyTrade()

@@ -3,10 +3,11 @@ package com.kbhit.orangebox.trading.controllers.dto;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
 import java.util.Set;
 
 public class BidDto {
+
+    private BidderDto bidder;
 
     @Valid
     @NotNull
@@ -17,6 +18,14 @@ public class BidDto {
     @NotNull
     @Size(min = 1)
     private Set<ItemDto> offeredItems;
+
+    public BidderDto getBidder() {
+        return bidder;
+    }
+
+    public void setBidder(BidderDto bidder) {
+        this.bidder = bidder;
+    }
 
     public Set<ItemDto> getRequestedItems() {
         return requestedItems;
