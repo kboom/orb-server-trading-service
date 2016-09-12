@@ -3,6 +3,7 @@ package com.kbhit.orangebox.trading.controllers.dto;
 public class ItemDto {
 
     private String id;
+    private String name;
 
     public String getId() {
         return id;
@@ -10,6 +11,10 @@ public class ItemDto {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -26,5 +31,10 @@ public class ItemDto {
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
+    }
+
+    public ItemDto setName(String name) {
+        this.name = name;
+        return this;
     }
 }

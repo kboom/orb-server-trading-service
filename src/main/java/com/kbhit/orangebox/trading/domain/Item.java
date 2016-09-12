@@ -27,4 +27,12 @@ public class Item {
     public Bidder getOwner() {
         return owner;
     }
+
+    public Bid getBid() {
+        return bid;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

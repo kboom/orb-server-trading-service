@@ -63,4 +63,5 @@ public class TradeDto {
     public void setResponder(BidderDto responder) {
         this.responder = responder;
     }
+
 }

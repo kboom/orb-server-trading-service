@@ -10,7 +10,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import static com.google.common.collect.Lists.newArrayList
 import static com.jayway.restassured.RestAssured.given
 import static com.jayway.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath
-import static org.hamcrest.Matchers.containsInAnyOrder
 import static org.hamcrest.core.IsEqual.equalTo
 
 class GetTradesRestTest extends RestTest {
@@ -41,8 +40,12 @@ class GetTradesRestTest extends RestTest {
                 .body("id", equalTo("1"))
                 .body("requester.login", equalTo("aaagacia"))
                 .body("responder.login", equalTo("kbhit"))
-                .body("initialBid.requestedItems", containsInAnyOrder("abc"))
-                .body("initialBid.offeredItems", containsInAnyOrder("abc"));
+                .body("initialBid.requestedItems[0].id", equalTo("BLUE GREG ITEM"))
+                .body("initialBid.offeredItems[0].id", equalTo("RED AGATHA ITEM"))
+                .body("latestBid.requestedItems[0].id", equalTo("BLUE AGATHA ITEM"))
+                .body("latestBid.requestedItems[1].id", equalTo("RED AGATHA ITEM"))
+                .body("latestBid.offeredItems[0].id", equalTo("BLUE GREG ITEM"))
+                .body("latestBid.offeredItems[1].id", equalTo("RED GREG ITEM"));
     }
 
 }

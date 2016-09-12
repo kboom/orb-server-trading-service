@@ -18,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.Set;
 
 import static com.kbhit.orangebox.trading.domain.Bid.buildBid;
 import static com.kbhit.orangebox.trading.domain.TradeId.referenceTrade;
@@ -69,7 +68,7 @@ public class BiddingController {
                 .build();
     }
 
-    private Collection<Item> collectItems(Set<ItemDto> items) {
+    private Collection<Item> collectItems(Collection<ItemDto> items) {
         return storageService.getItemsById(Lists.transform(Lists.newArrayList(items), ItemDto::getId));
     }
 

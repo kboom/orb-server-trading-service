@@ -9,7 +9,7 @@ public class TradeIdConverter implements CustomConverter {
 
     @Override
     public Object convert(Object existingDestinationFieldValue, Object sourceFieldValue, Class<?> destinationClass, Class<?> sourceClass) {
-        return ((TradeId) sourceFieldValue).rawValue();
+        return sourceFieldValue != null ? ((TradeId) sourceFieldValue).rawValue() : null;
     }
 
 }

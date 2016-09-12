@@ -9,7 +9,7 @@ public class ItemIdConverter implements CustomConverter {
 
     @Override
     public Object convert(Object existingDestinationFieldValue, Object sourceFieldValue, Class<?> destinationClass, Class<?> sourceClass) {
-        return ((ItemId) sourceFieldValue).rawValue();
+        return sourceFieldValue != null ? ((ItemId) sourceFieldValue).rawValue() : null;
     }
 
 }
