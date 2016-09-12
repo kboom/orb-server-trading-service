@@ -41,11 +41,30 @@ class GetTradesRestTest extends RestTest {
                 .body("requester.login", equalTo("aaagacia"))
                 .body("responder.login", equalTo("kbhit"))
                 .body("initialBid.requestedItems[0].id", equalTo("BLUE GREG ITEM"))
+                .body("initialBid.requestedItems[0].name", equalTo("Blue Greg's item"))
                 .body("initialBid.offeredItems[0].id", equalTo("RED AGATHA ITEM"))
+                .body("initialBid.offeredItems[0].name", equalTo("Red Agatha's item"))
                 .body("latestBid.requestedItems[0].id", equalTo("BLUE AGATHA ITEM"))
+                .body("latestBid.requestedItems[0].name", equalTo("Blue Agatha's item"))
                 .body("latestBid.requestedItems[1].id", equalTo("RED AGATHA ITEM"))
+                .body("latestBid.requestedItems[1].name", equalTo("Red Agatha's item"))
                 .body("latestBid.offeredItems[0].id", equalTo("BLUE GREG ITEM"))
-                .body("latestBid.offeredItems[1].id", equalTo("RED GREG ITEM"));
+                .body("latestBid.offeredItems[0].name", equalTo("Blue Greg's item"))
+                .body("latestBid.offeredItems[1].id", equalTo("RED GREG ITEM"))
+                .body("latestBid.offeredItems[1].name", equalTo("Red Greg's item"))
+                .body("historicBids[0].requestedItems[0].id", equalTo("BLUE GREG ITEM"))
+                .body("historicBids[0].requestedItems[0].name", equalTo("Blue Greg's item"))
+                .body("historicBids[0].offeredItems[0].id", equalTo("RED AGATHA ITEM"))
+                .body("historicBids[0].offeredItems[0].name", equalTo("Red Agatha's item"))
+                .body("historicBids[1].requestedItems[0].id", equalTo("BLUE AGATHA ITEM"))
+                .body("historicBids[1].requestedItems[0].name", equalTo("Blue Agatha's item"))
+                .body("historicBids[1].requestedItems[1].id", equalTo("RED AGATHA ITEM"))
+                .body("historicBids[1].requestedItems[1].name", equalTo("Red Agatha's item"))
+                .body("historicBids[1].offeredItems[0].id", equalTo("BLUE GREG ITEM"))
+                .body("historicBids[1].offeredItems[0].name", equalTo("Blue Greg's item"))
+                .body("historicBids[1].offeredItems[1].id", equalTo("RED GREG ITEM"))
+                .body("historicBids[1].offeredItems[1].name", equalTo("Red Greg's item"))
+
     }
 
 }
