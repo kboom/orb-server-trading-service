@@ -23,22 +23,10 @@ class PostInitialBidRestTest extends RestTest {
     DbSetupTestDataLoader testDataLoader
 
     @Autowired
-    WireMockServer wireMockServer
-
-    @Autowired
     UserServiceStubber userServiceStubber;
 
     @Autowired
     TokenProvider tokenProvider
-
-    def setup() {
-        wireMockServer.start()
-        testDataLoader.reloadTestData()
-    }
-
-    def destroy() {
-        wireMockServer.stop()
-    }
 
     def "Posting initial bid creates a new trade"() {
         given:

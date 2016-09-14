@@ -20,10 +20,6 @@ class GetTradesRestTest extends RestTest {
     @Autowired
     TokenProvider tokenProvider
 
-    def setup() {
-        testDataLoader.reloadTestData()
-    }
-
     def "Gets single trade"() {
         given:
         testDataLoader.createDummyBidders();
