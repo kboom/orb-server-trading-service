@@ -9,7 +9,6 @@ import com.kbhit.orangebox.trading.domain.User
 import com.kbhit.orangebox.trading.domain.service.BiddingService
 import com.kbhit.orangebox.trading.domain.service.Item
 import com.kbhit.orangebox.trading.domain.service.StorageService
-import com.kbhit.orangebox.trading.stubs.UserBuilder
 import org.springframework.beans.factory.annotation.Autowired
 
 import static com.kbhit.orangebox.trading.domain.Bid.buildBid
@@ -42,8 +41,8 @@ class PostingInitialBidSpec extends BehaviourSpecification {
 
 
     def setup() {
-        agatha = buildUser().withUsername("agatha").build();
-        greg = buildUser().withUsername("greg").build();
+        agatha = buildUser().withUsername("agatha").build()
+        greg = buildUser().withUsername("greg").build()
         firstAgathaItem = buildItem().withId(AGATHA_FIRST_ITEM_ID.getId()).withOwner(agatha).build()
         secondAgathaItem = buildItem().withId(AGATHA_SECOND_ITEM_ID.getId()).withOwner(agatha).build()
         firstGregItem = buildItem().withId(GREG_FIRST_ITEM_ID.getId()).withOwner(greg).build()
@@ -52,7 +51,7 @@ class PostingInitialBidSpec extends BehaviourSpecification {
         testDataLoader.createDummyBidders();
     }
 
-    def "Can create trade using initial bid"() {
+    def "Can create a trade from initial bid"() {
         given:
         Bid initialBid = buildBid(bidderService)
                 .withBidder(bidderService.getOrCreateBidder(greg))
@@ -64,7 +63,23 @@ class PostingInitialBidSpec extends BehaviourSpecification {
         Trade trade = biddingService.createTradeFor(initialBid)
 
         then:
-        assertThat(trade.isActive()).isTrue();
+        assertThat(trade).isNotNull();
+    }
+
+    def "Trade requester is set to initial bidder"() {
+        def initialBidder = bidderService.getOrCreateBidder(greg)
+        given:
+        Bid initialBid = buildBid(bidderService)
+                .withBidder(initialBidder)
+                .withRequestedItems(singletonList(firstAgathaItem))
+                .withOfferedItems(singletonList(firstGregItem))
+                .build()
+
+        when:
+        Trade trade = biddingService.createTradeFor(initialBid)
+
+        then:
+        assertThat(trade.getRequester()).isEqualTo(initialBidder)
     }
 
 }
