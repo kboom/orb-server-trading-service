@@ -32,4 +32,21 @@ public class Bidder {
     public String getLastName() {
         return lastName;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Bidder bidder = (Bidder) o;
+
+        return id.equals(bidder.id);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
 }
