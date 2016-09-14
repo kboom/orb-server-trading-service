@@ -4,6 +4,8 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import static com.kbhit.orangebox.trading.domain.BidderId.referenceBidder;
+
 @Entity
 @Table(name = "BIDDERS")
 public class Bidder {
@@ -33,6 +35,11 @@ public class Bidder {
         return lastName;
     }
 
+    public Bidder(User user) {
+        id = referenceBidder(user.getLogin());
+        login = user.getLogin();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,6 +54,11 @@ public class Bidder {
     @Override
     public int hashCode() {
         return id.hashCode();
+    }
+
+    @SuppressWarnings("unused")
+    Bidder() {
+
     }
 
 }

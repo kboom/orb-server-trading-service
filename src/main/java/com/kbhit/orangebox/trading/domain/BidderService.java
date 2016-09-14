@@ -23,9 +23,13 @@ public class BidderService {
         if (bidderOptional.isPresent()) {
             return bidderOptional.get();
         } else {
-            Bidder bidder = new Bidder();
+            Bidder bidder = createNewBidder(user);
             return bidderRepository.save(bidder);
         }
+    }
+
+    private Bidder createNewBidder(User user) {
+        return new Bidder(user);
     }
 
 }
