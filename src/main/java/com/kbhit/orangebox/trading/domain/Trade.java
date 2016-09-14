@@ -1,6 +1,7 @@
 package com.kbhit.orangebox.trading.domain;
 
 import org.joda.time.DateTime;
+import org.joda.time.ReadableDateTime;
 
 import javax.persistence.*;
 import java.util.List;
@@ -91,6 +92,12 @@ public class Trade {
             trade.initialBid = initialBid;
             trade.latestBid = initialBid;
             trade.historicBids.add(initialBid);
+            return this;
+        }
+
+        public TradeBuilder createdOn(ReadableDateTime createDate) {
+            trade.createDate = new DateTime(createDate);
+            trade.updateDate = new DateTime(createDate);
             return this;
         }
 

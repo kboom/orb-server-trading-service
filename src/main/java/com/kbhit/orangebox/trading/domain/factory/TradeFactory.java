@@ -4,6 +4,7 @@ import com.kbhit.orangebox.trading.domain.Bid;
 import com.kbhit.orangebox.trading.domain.Bidder;
 import com.kbhit.orangebox.trading.domain.BidItem;
 import com.kbhit.orangebox.trading.domain.Trade;
+import com.kbhit.orangebox.trading.domain.service.TimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Set;
@@ -15,8 +16,12 @@ public class TradeFactory {
     @Autowired
     private TradeIdGenerator idGenerator;
 
+    @Autowired
+    private TimeService timeService;
+
     public Trade createTradeFor(Bid initialBid) {
         return aTrade(idGenerator.generateId())
+                .createdOn(timeService.getCurrentTime())
                 .withInitialBid(initialBid)
                 .withRequester(initialBid.getBidder())
                 .withResponder(resolveResponderFrom(initialBid))

@@ -9,6 +9,8 @@ import com.kbhit.orangebox.trading.domain.User
 import com.kbhit.orangebox.trading.domain.service.BiddingService
 import com.kbhit.orangebox.trading.domain.service.Item
 import com.kbhit.orangebox.trading.domain.service.StorageService
+import com.kbhit.orangebox.trading.stubs.ConfigurableTimeService
+import org.joda.time.DateTime
 import org.springframework.beans.factory.annotation.Autowired
 import spock.lang.Shared
 
@@ -36,6 +38,9 @@ class PostingInitialBidSpec extends BehaviourSpecification {
 
     @Autowired
     BidderService bidderService;
+
+    @Autowired
+    ConfigurableTimeService timeService;
 
     def setupSpec() {
         agatha = buildUser().withUsername("agatha").build()
@@ -95,9 +100,30 @@ class PostingInitialBidSpec extends BehaviourSpecification {
         assertThat(trade.getResponder()).isEqualTo(requestedItemsOwner)
     }
 
+    def "Trade create date is equal to the date initial bid is placed on"() {
+        given:
+        def currentTime = new DateTime("2016-09-14");
+        timeService.setCurrentTime(currentTime)
+        def initialBid = createDummyBid()
+
+        when:
+        Trade trade = biddingService.createTradeFor(initialBid)
+
+        then:
+        assertThat(trade.getCreateDate()).isEqualByComparingTo(currentTime)
+    }
+
     @Override
     protected void loadTestData(TestDataLoader testDataLoader) {
         testDataLoader.createDummyBidders();
+    }
+
+    private Bid createDummyBid() {
+        buildBid(bidderService)
+                .withBidder(bidderService.getOrCreateBidder(greg))
+                .withRequestedItems(singletonList(firstAgathaItem))
+                .withOfferedItems(singletonList(firstGregItem))
+                .build()
     }
 
 }
