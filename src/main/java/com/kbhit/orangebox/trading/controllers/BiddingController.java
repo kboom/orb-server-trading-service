@@ -10,6 +10,7 @@ import com.kbhit.orangebox.trading.domain.service.BiddingContextService;
 import com.kbhit.orangebox.trading.domain.service.BiddingService;
 import com.kbhit.orangebox.trading.domain.service.StorageService;
 import com.kbhit.orangebox.trading.domain.service.TimeService;
+import com.kbhit.orangebox.trading.security.AuthoritiesConstants;
 import io.swagger.annotations.ApiOperation;
 import org.apache.http.entity.ContentType;
 import org.dozer.Mapper;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -45,6 +47,7 @@ public class BiddingController {
 
     @ApiOperation(value = "postInitialBid")
     @RequestMapping(value = "/bids", method = POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Secured(AuthoritiesConstants.USER)
     @ResponseBody
     public ResponseEntity<BidDto> postInitialBid(@RequestBody BidDto bidDto) {
         Bid bid = constructBid(bidDto);
@@ -54,6 +57,7 @@ public class BiddingController {
 
     @ApiOperation(value = "postBid")
     @RequestMapping(value = "/trades/{tradeId}/bids", method = POST)
+    @Secured(AuthoritiesConstants.USER)
     @ResponseBody
     public ResponseEntity<BidDto> postBid(@PathVariable("tradeId") String tradeId, @RequestBody BidDto bidDto) {
         Bid bid = constructBid(bidDto);

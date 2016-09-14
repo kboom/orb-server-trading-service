@@ -25,7 +25,7 @@ public class DefaultBiddingContextService implements BiddingContextService {
         if (!(auth instanceof AnonymousAuthenticationToken)) {
             UserDetails userDetails =
                     (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            User user = userService.findUserByLogin(userDetails.getUsername()).orElseThrow(IllegalStateException::new);
+            User user = userService.findUserByLogin(userDetails.getUsername());//.orElseThrow(IllegalStateException::new);
             return getOrCreateBidder(user);
         } else {
             throw new IllegalStateException("Not authenticated user cannot be a bidder");
