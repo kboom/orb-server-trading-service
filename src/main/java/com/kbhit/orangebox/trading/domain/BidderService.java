@@ -19,7 +19,7 @@ public class BidderService {
     }
 
     public Bidder getOrCreateBidder(User user) {
-        Optional<Bidder> bidderOptional = bidderRepository.findByLogin(user.getLogin());
+        Optional<Bidder> bidderOptional = bidderRepository.findByLogin(user.getUsername());
         if (bidderOptional.isPresent()) {
             return bidderOptional.get();
         } else {

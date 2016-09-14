@@ -20,7 +20,7 @@ public class User {
         return password;
     }
 
-    public String getLogin() {
+    public String getUsername() {
         return username;
     }
 }

@@ -20,7 +20,7 @@ public class BidderServiceTest extends DomainTest {
     @Test
     public void persistsNewBidderIfNotPresent() {
         bidderService.getOrCreateBidder(DummyUsers.otherUser);
-        assertThat(bidderRepository.findByLogin(DummyUsers.otherUser.getLogin())).isNotNull();
+        assertThat(bidderRepository.findByLogin(DummyUsers.otherUser.getUsername())).isNotNull();
     }
 
     @Test
@@ -31,13 +31,13 @@ public class BidderServiceTest extends DomainTest {
     @Test
     public void returnsNewlyCreatedBidder() {
         Bidder createdBidder = bidderService.getOrCreateBidder(DummyUsers.otherUser);
-        assertThat(createdBidder.getId()).isEqualTo(referenceBidder(DummyUsers.otherUser.getLogin()));
+        assertThat(createdBidder.getId()).isEqualTo(referenceBidder(DummyUsers.otherUser.getUsername()));
     }
 
     @Test
     public void newlyCreatedBidderHasLoginLikeUser() {
         Bidder createdBidder = bidderService.getOrCreateBidder(DummyUsers.otherUser);
-        assertThat(createdBidder.getLogin()).isEqualTo(DummyUsers.otherUser.getLogin());
+        assertThat(createdBidder.getLogin()).isEqualTo(DummyUsers.otherUser.getUsername());
     }
 
     @Override

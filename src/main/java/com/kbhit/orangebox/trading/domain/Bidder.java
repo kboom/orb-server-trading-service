@@ -36,8 +36,8 @@ public class Bidder {
     }
 
     public Bidder(User user) {
-        id = referenceBidder(user.getLogin());
-        login = user.getLogin();
+        id = referenceBidder(user.getUsername());
+        login = user.getUsername();
     }
 
     @Override

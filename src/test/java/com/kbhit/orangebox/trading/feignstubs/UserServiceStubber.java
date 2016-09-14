@@ -19,7 +19,7 @@ public class UserServiceStubber {
 
     public void stubUser(User user) {
         try {
-            server.stubFor(get(urlEqualTo(format("/users/%s", user.getLogin())))
+            server.stubFor(get(urlEqualTo(format("/users/%s", user.getUsername())))
                     .willReturn(aResponse().withHeader("Content-Type", "application/json").withStatus(200).withBody(mapper.writeValueAsString(user))));
         } catch (JsonProcessingException e) {
             throw new IllegalStateException(e);

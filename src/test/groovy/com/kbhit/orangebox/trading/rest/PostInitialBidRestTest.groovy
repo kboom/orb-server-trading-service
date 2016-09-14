@@ -1,9 +1,7 @@
 package com.kbhit.orangebox.trading.rest
 
-import com.github.tomakehurst.wiremock.WireMockServer
 import com.jayway.restassured.http.ContentType
 import com.kbhit.orangebox.trading.dbsetup.DbSetupTestDataLoader
-import com.kbhit.orangebox.trading.domain.User
 import com.kbhit.orangebox.trading.feignstubs.UserServiceStubber
 import com.kbhit.orangebox.trading.security.AuthoritiesConstants
 import com.kbhit.orangebox.trading.security.jwt.TokenProvider
@@ -32,11 +30,11 @@ class PostInitialBidRestTest extends RestTest {
         given:
         userServiceStubber.stubUser(buildUser()
                 .byDefault()
-                .withUsername("grzegorz")
+                .withUsername("greg")
                 .withPassword("123")
                 .build());
 
-        def token = tokenProvider.createToken(new TestingAuthenticationToken("grzegorz", "123", newArrayList(new SimpleGrantedAuthority(AuthoritiesConstants.USER))), false)
+        def token = tokenProvider.createToken(new TestingAuthenticationToken("greg", "123", newArrayList(new SimpleGrantedAuthority(AuthoritiesConstants.USER))), false)
         def request = given()
                 .contentType(ContentType.JSON)
                 .body('{ "requestedItems" : [{ "id" : "a" }], "offeredItems": [{ "id" : "b" }] }')
