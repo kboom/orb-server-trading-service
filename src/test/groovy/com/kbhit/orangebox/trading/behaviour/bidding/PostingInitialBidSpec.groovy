@@ -8,7 +8,7 @@ import com.kbhit.orangebox.trading.domain.service.StorageService
 import org.springframework.beans.factory.annotation.Autowired
 
 import static com.kbhit.orangebox.trading.domain.Bid.buildBid
-import static com.kbhit.orangebox.trading.mocks.TestItem.*
+import static com.kbhit.orangebox.trading.feignstubs.TestItem.*
 import static org.assertj.core.api.Assertions.assertThat
 
 class PostingInitialBidSpec extends BehaviourSpecification {

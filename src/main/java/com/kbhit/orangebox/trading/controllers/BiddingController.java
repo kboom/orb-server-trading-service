@@ -11,9 +11,11 @@ import com.kbhit.orangebox.trading.domain.service.BiddingService;
 import com.kbhit.orangebox.trading.domain.service.StorageService;
 import com.kbhit.orangebox.trading.domain.service.TimeService;
 import io.swagger.annotations.ApiOperation;
+import org.apache.http.entity.ContentType;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +44,7 @@ public class BiddingController {
     private Mapper mapper;
 
     @ApiOperation(value = "postInitialBid")
-    @RequestMapping(value = "/bids", method = POST)
+    @RequestMapping(value = "/bids", method = POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<BidDto> postInitialBid(@RequestBody BidDto bidDto) {
         Bid bid = constructBid(bidDto);

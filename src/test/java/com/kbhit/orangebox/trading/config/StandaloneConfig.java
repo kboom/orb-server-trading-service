@@ -1,7 +1,6 @@
 package com.kbhit.orangebox.trading.config;
 
-import com.kbhit.orangebox.trading.mocks.ItemServiceStubber;
-import feign.Logger;
+import com.kbhit.orangebox.trading.feignstubs.ItemServiceStubber;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

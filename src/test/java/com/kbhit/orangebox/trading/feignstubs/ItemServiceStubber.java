@@ -1,4 +1,4 @@
-package com.kbhit.orangebox.trading.mocks;
+package com.kbhit.orangebox.trading.feignstubs;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
