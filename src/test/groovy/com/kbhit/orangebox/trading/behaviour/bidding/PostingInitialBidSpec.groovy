@@ -113,6 +113,19 @@ class PostingInitialBidSpec extends BehaviourSpecification {
         assertThat(trade.getCreateDate()).isEqualByComparingTo(currentTime)
     }
 
+    def "Trade update date is equal to the date initial bid is placed on"() {
+        given:
+        def currentTime = new DateTime("2016-09-14");
+        timeService.setCurrentTime(currentTime)
+        def initialBid = createDummyBid()
+
+        when:
+        Trade trade = biddingService.createTradeFor(initialBid)
+
+        then:
+        assertThat(trade.getUpdateDate()).isEqualByComparingTo(currentTime)
+    }
+
     @Override
     protected void loadTestData(TestDataLoader testDataLoader) {
         testDataLoader.createDummyBidders();
