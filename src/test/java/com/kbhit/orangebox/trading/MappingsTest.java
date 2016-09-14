@@ -1,8 +1,7 @@
 package com.kbhit.orangebox.trading;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kbhit.orangebox.trading.behaviour.BehaviourSpecification;
-import com.kbhit.orangebox.trading.domain.Item;
+import com.kbhit.orangebox.trading.domain.BidItem;
 import com.kbhit.orangebox.trading.domain.Bid;
 import com.kbhit.orangebox.trading.domain.Bidder;
 import com.kbhit.orangebox.trading.domain.Trade;
@@ -33,7 +32,7 @@ public class MappingsTest extends IntegrationTest {
 
     @Test
     public void canSerializeItem() {
-        assertThat(objectMapper.canSerialize(Item.class)).isTrue();
+        assertThat(objectMapper.canSerialize(BidItem.class)).isTrue();
     }
 
 }

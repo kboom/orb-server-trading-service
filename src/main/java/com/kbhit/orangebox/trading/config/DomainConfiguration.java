@@ -1,5 +1,6 @@
 package com.kbhit.orangebox.trading.config;
 
+import com.kbhit.orangebox.trading.domain.BidderService;
 import com.kbhit.orangebox.trading.domain.factory.TradeFactory;
 import com.kbhit.orangebox.trading.domain.factory.TradeIdGenerator;
 import com.kbhit.orangebox.trading.domain.service.BiddingService;
@@ -14,6 +15,11 @@ public class DomainConfiguration {
     @Bean
     public BiddingService biddingService() {
         return new BiddingService();
+    }
+
+    @Bean
+    public BidderService bidderService() {
+        return new BidderService();
     }
 
     @Bean

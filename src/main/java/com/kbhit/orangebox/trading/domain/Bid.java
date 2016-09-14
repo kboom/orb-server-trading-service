@@ -1,5 +1,6 @@
 package com.kbhit.orangebox.trading.domain;
 
+import com.kbhit.orangebox.trading.domain.service.Item;
 import org.joda.time.DateTime;
 import org.joda.time.ReadableDateTime;
 
@@ -9,6 +10,7 @@ import java.util.Set;
 
 import static com.google.common.collect.Sets.newHashSet;
 import static java.util.Collections.unmodifiableSet;
+import static java.util.stream.Collectors.toList;
 
 @Entity
 @Table(name = "BIDS")
@@ -36,14 +38,14 @@ public class Bid {
             joinColumns = @JoinColumn(name = "bid_id"),
             inverseJoinColumns = @JoinColumn(name = "item_id")
     )
-    private Set<Item> offeredItems;
+    private Set<BidItem> offeredItems;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "REQUESTED_ITEMS",
             joinColumns = @JoinColumn(name = "bid_id"),
             inverseJoinColumns = @JoinColumn(name = "item_id")
     )
-    private Set<Item> requestedItems;
+    private Set<BidItem> requestedItems;
 
 
     public DateTime getPlaceDate() {
@@ -58,11 +60,11 @@ public class Bid {
         return bidder;
     }
 
-    public Set<Item> getOfferedItems() {
+    public Set<BidItem> getOfferedItems() {
         return unmodifiableSet(offeredItems);
     }
 
-    public Set<Item> getRequestedItems() {
+    public Set<BidItem> getRequestedItems() {
         return unmodifiableSet(requestedItems);
     }
 
@@ -71,18 +73,20 @@ public class Bid {
 
     }
 
-    public static BidBuilder buildBid() {
-        return new BidBuilder();
+    public static BidBuilder buildBid(BidderService bidderService) {
+        return new BidBuilder(bidderService);
     }
 
     public static class BidBuilder {
 
         private Bid bid;
+        private BidderService bidderService;
 
-        BidBuilder() {
-            bid = new Bid();
-            bid.offeredItems = newHashSet();
-            bid.requestedItems = newHashSet();
+        BidBuilder(BidderService bidderService) {
+            this.bidderService = bidderService;
+            this.bid = new Bid();
+            this.bid.offeredItems = newHashSet();
+            this.bid.requestedItems = newHashSet();
         }
 
         public BidBuilder withPlaceDate(ReadableDateTime dateTime) {
@@ -96,13 +100,19 @@ public class Bid {
         }
 
         public BidBuilder withRequestedItems(Collection<Item> items) {
-            bid.requestedItems.addAll(items);
+            Bidder owningBidder = bidderService.getOwnerOf(items);
+            bid.requestedItems.addAll(items.stream().map(item -> createBidItem(item, owningBidder)).collect(toList()));
             return this;
         }
 
         public BidBuilder withOfferedItems(Collection<Item> items) {
-            bid.offeredItems.addAll(items);
+            Bidder owningBidder = bidderService.getOwnerOf(items);
+            bid.offeredItems.addAll(items.stream().map(item -> createBidItem(item, owningBidder)).collect(toList()));
             return this;
+        }
+
+        private BidItem createBidItem(Item item, Bidder bidder) {
+            return new BidItem(item, bidder, bid);
         }
 
         public Bid build() {

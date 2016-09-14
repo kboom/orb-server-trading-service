@@ -2,7 +2,7 @@ package com.kbhit.orangebox.trading.domain.factory;
 
 import com.kbhit.orangebox.trading.domain.Bid;
 import com.kbhit.orangebox.trading.domain.Bidder;
-import com.kbhit.orangebox.trading.domain.Item;
+import com.kbhit.orangebox.trading.domain.BidItem;
 import com.kbhit.orangebox.trading.domain.Trade;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,7 +24,7 @@ public class TradeFactory {
     }
 
     private Bidder resolveResponderFrom(Bid initialBid) {
-        Set<Item> requestedItems = initialBid.getRequestedItems();
+        Set<BidItem> requestedItems = initialBid.getRequestedItems();
         return requestedItems.iterator().next().getOwner();
     }
 

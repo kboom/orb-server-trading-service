@@ -4,15 +4,15 @@ import com.google.common.collect.Lists;
 import com.kbhit.orangebox.trading.controllers.dto.BidDto;
 import com.kbhit.orangebox.trading.controllers.dto.ItemDto;
 import com.kbhit.orangebox.trading.domain.Bid;
-import com.kbhit.orangebox.trading.domain.Item;
+import com.kbhit.orangebox.trading.domain.BidderService;
 import com.kbhit.orangebox.trading.domain.Trade;
 import com.kbhit.orangebox.trading.domain.service.BiddingContextService;
 import com.kbhit.orangebox.trading.domain.service.BiddingService;
-import com.kbhit.orangebox.trading.domain.service.StorageService;
 import com.kbhit.orangebox.trading.domain.service.TimeService;
+import com.kbhit.orangebox.trading.domain.service.Item;
+import com.kbhit.orangebox.trading.domain.service.StorageService;
 import com.kbhit.orangebox.trading.security.AuthoritiesConstants;
 import io.swagger.annotations.ApiOperation;
-import org.apache.http.entity.ContentType;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,6 +43,9 @@ public class BiddingController {
     private BiddingContextService userContextService;
 
     @Autowired
+    private BidderService bidderService;
+
+    @Autowired
     private Mapper mapper;
 
     @ApiOperation(value = "postInitialBid")
@@ -66,15 +69,15 @@ public class BiddingController {
     }
 
     private Bid constructBid(BidDto bidDto) {
-        return buildBid()
+        return buildBid(bidderService)
                 .withBidder(userContextService.getBiddingUser())
                 .withPlaceDate(timeService.getCurrentTime())
-                .withOfferedItems(collectItems(bidDto.getOfferedItems()))
-                .withRequestedItems(collectItems(bidDto.getRequestedItems()))
+                .withOfferedItems(collectStoredItems(bidDto.getOfferedItems()))
+                .withRequestedItems(collectStoredItems(bidDto.getRequestedItems()))
                 .build();
     }
 
-    private Collection<Item> collectItems(Collection<ItemDto> items) {
+    private Collection<Item> collectStoredItems(Collection<ItemDto> items) {
         return storageService.getItemsById(Lists.transform(Lists.newArrayList(items), ItemDto::getId));
     }
 

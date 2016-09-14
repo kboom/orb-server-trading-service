@@ -1,6 +1,7 @@
 package com.kbhit.orangebox.trading.domain.service;
 
 import com.kbhit.orangebox.trading.domain.Bidder;
+import com.kbhit.orangebox.trading.domain.BidderService;
 import com.kbhit.orangebox.trading.domain.User;
 import com.kbhit.orangebox.trading.domain.repository.BidderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class DefaultBiddingContextService implements BiddingContextService {
     private UserService userService;
 
     @Autowired
-    private BidderRepository bidderRepository;
+    private BidderService bidderService;
 
     @Override
     public Bidder getBiddingUser() {
@@ -26,19 +27,9 @@ public class DefaultBiddingContextService implements BiddingContextService {
             UserDetails userDetails =
                     (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             User user = userService.findUserByLogin(userDetails.getUsername());//.orElseThrow(IllegalStateException::new);
-            return getOrCreateBidder(user);
+            return bidderService.getOrCreateBidder(user);
         } else {
             throw new IllegalStateException("Not authenticated user cannot be a bidder");
-        }
-    }
-
-    private Bidder getOrCreateBidder(User user) {
-        Optional<Bidder> bidderOptional = bidderRepository.findByLogin(user.getLogin());
-        if(bidderOptional.isPresent()) {
-            return bidderOptional.get();
-        } else {
-            Bidder bidder = new Bidder();
-            return bidderRepository.save(bidder);
         }
     }
 

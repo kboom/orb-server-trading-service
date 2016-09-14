@@ -7,23 +7,23 @@ import static com.kbhit.orangebox.trading.dbsetup.builders.BidderDummyBuilder.aD
 
 public class InsertDummyBidders {
 
-    static final String GRZEGORZ_BIDDER_ID = "grzegorz";
+    static final String GRZEGORZ_BIDDER_ID = "greg";
 
-    static final String AGATA_BIDDER_ID = "agata";
+    static final String AGATA_BIDDER_ID = "agatha";
 
 
     private static final Operation AGATA_BIDDER = aDummyBidder()
             .withId(AGATA_BIDDER_ID)
             .withFirstName("Agata")
             .withLastName("Gurgul")
-            .withLogin("aaagacia")
+            .withLogin("agatha")
             .build();
 
     private static final Operation GRZEGORZ_BIDDER = aDummyBidder()
             .withId(GRZEGORZ_BIDDER_ID)
             .withFirstName("Grzegorz")
             .withLastName("Gurgul")
-            .withLogin("kbhit")
+            .withLogin("greg")
             .build();
 
     public static Operation insertAll() {

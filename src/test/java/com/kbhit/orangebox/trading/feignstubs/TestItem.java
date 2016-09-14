@@ -2,23 +2,22 @@ package com.kbhit.orangebox.trading.feignstubs;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.kbhit.orangebox.trading.domain.Item;
+import com.kbhit.orangebox.trading.domain.service.Item;
 
 import java.util.List;
 import java.util.Map;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.newHashSet;
-import static com.kbhit.orangebox.trading.domain.ItemId.itemId;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public enum TestItem {
 
-    AGATA_FIRST_ITEM_ID("agata.first"),
-    AGATA_SECOND_ITEM_ID("agata.second"),
-    GRZEGORZ_FIRST_ITEM_ID("grzegorz.first"),
-    GRZEGORZ_SECOND_ITEM_ID("grzegorz.second");
+    AGATHA_FIRST_ITEM_ID("agata.first"),
+    AGATHA_SECOND_ITEM_ID("agata.second"),
+    GREG_FIRST_ITEM_ID("grzegorz.first"),
+    GREG_SECOND_ITEM_ID("grzegorz.second");
 
     private String id;
     private Item item;
@@ -26,7 +25,7 @@ public enum TestItem {
     TestItem(String id) {
         this.id = id;
         this.item = mock(Item.class);
-        when(item.getId()).thenReturn(itemId(id));
+        when(item.getId()).thenReturn(id);
     }
 
     public String getId() {
