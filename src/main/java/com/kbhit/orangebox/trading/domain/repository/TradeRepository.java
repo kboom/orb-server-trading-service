@@ -8,4 +8,6 @@ public interface TradeRepository extends Repository<Trade,TradeId> {
 
     Trade findTradeById(TradeId tradeId);
 
+    Trade save(Trade trade);
+
 }

@@ -80,6 +80,11 @@ public class Trade {
         return responder;
     }
 
+    public void makeBid(Bid bid) {
+        latestBid = bid;
+        historicBids.add(bid);
+    }
+
     public static class TradeBuilder {
 
         private Trade trade;

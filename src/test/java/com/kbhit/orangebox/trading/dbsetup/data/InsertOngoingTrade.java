@@ -16,7 +16,7 @@ import static com.ninja_squad.dbsetup.Operations.sql;
 
 public class InsertOngoingTrade {
 
-    private static final String ONGOING_TRADE_ID = "1";
+    public static final String ONGOING_TRADE_ID = "1";
     private static final Integer INITIAL_BID_ID = 1;
     private static final Integer LATEST_BID_ID = 2;
 

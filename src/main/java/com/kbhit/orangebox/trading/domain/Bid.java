@@ -77,6 +77,27 @@ public class Bid {
         return new BidBuilder(bidderService);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Bid bid = (Bid) o;
+
+        if (placeDate != null ? !placeDate.equals(bid.placeDate) : bid.placeDate != null) return false;
+        if (trade != null ? !trade.equals(bid.trade) : bid.trade != null) return false;
+        return bidder != null ? bidder.equals(bid.bidder) : bid.bidder == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = placeDate != null ? placeDate.hashCode() : 0;
+        result = 31 * result + (trade != null ? trade.hashCode() : 0);
+        result = 31 * result + (bidder != null ? bidder.hashCode() : 0);
+        return result;
+    }
+
     public static class BidBuilder {
 
         private Bid bid;
