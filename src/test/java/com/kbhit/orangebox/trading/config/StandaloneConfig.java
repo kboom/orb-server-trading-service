@@ -1,7 +1,7 @@
 package com.kbhit.orangebox.trading.config;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
-import com.kbhit.orangebox.trading.feignstubs.ItemServiceStubber;
+import com.kbhit.orangebox.trading.feignstubs.StorageServiceStubber;
 import com.kbhit.orangebox.trading.feignstubs.UserServiceStubber;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,8 +17,8 @@ public class StandaloneConfig {
     }
 
     @Bean
-    public ItemServiceStubber itemServiceStubber() {
-        return new ItemServiceStubber();
+    public StorageServiceStubber itemServiceStubber() {
+        return new StorageServiceStubber();
     }
 
     @Bean
