@@ -18,7 +18,7 @@ public final class DbSetupTestDataLoader implements TestDataLoader {
     private DataSource dataSource;
 
     @Override
-    public void reloadTestData() {
+    public void cleanTables() {
         launchSequence(DataSetOperations.DELETE_ALL_DATA);
     }
 

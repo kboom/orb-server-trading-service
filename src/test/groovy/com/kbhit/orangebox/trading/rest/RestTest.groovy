@@ -37,7 +37,7 @@ abstract class RestTest extends Specification {
     def setup() {
         RestAssured.port = port
         wireMockServer.start()
-        testDataLoader.reloadTestData()
+        testDataLoader.cleanTables()
     }
 
     def destroy() {

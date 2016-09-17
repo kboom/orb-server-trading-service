@@ -2,7 +2,7 @@ package com.kbhit.orangebox.trading;
 
 public interface TestDataLoader {
 
-    void reloadTestData();
+    void cleanTables();
 
     void createDummyTrade();
 

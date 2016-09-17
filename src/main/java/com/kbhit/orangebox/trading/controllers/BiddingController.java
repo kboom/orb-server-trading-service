@@ -58,7 +58,7 @@ public class BiddingController {
         return new ResponseEntity<>(mapper.map(trade.getInitialBid(), BidDto.class), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "postBid")
+    @ApiOperation(value = "postResponseBid")
     @RequestMapping(value = "/trades/{tradeId}/bids", method = POST)
     @Secured(AuthoritiesConstants.USER)
     @ResponseBody
