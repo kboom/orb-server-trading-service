@@ -76,7 +76,7 @@ class PostInitialBidRestTest extends RestTest {
 
         then:
         response.then().statusCode(200)
-                .body(matchesJsonSchemaInClasspath("trade.json"))
+                .body(matchesJsonSchemaInClasspath("bid.json"))
                 .body("bidder.login", equalTo("greg"))
                 .body("requestedItems", hasSize(1))
                 .body("requestedItems[0].id", equalTo("a"))
