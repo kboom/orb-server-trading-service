@@ -52,6 +52,7 @@ class PostInitialBidRestTest extends RestTest {
         storageServiceStubber.stubItems(
                 buildItem()
                         .withId("a")
+                        .withName("item a")
                         .withOwner(agathaUser)
                         .build()
         )
@@ -59,6 +60,7 @@ class PostInitialBidRestTest extends RestTest {
         storageServiceStubber.stubItems(
                 buildItem()
                         .withId("b")
+                        .withName("item b")
                         .withOwner(gregUser)
                         .build()
         )
@@ -80,8 +82,10 @@ class PostInitialBidRestTest extends RestTest {
                 .body("bidder.login", equalTo("greg"))
                 .body("requestedItems", hasSize(1))
                 .body("requestedItems[0].id", equalTo("a"))
+                .body("requestedItems[0].name", equalTo("item a"))
                 .body("offeredItems", hasSize(1))
-                .body("offeredItems[0].id", equalTo("b"));
+                .body("offeredItems[0].id", equalTo("b"))
+                .body("offeredItems[0].name", equalTo("item b"));
     }
 
 }

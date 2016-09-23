@@ -26,6 +26,7 @@ public class BiddingService {
     @Transactional
     public Trade createTradeFor(Bid initialBid) {
         Trade trade = tradeFactory.createTradeFor(initialBid);
+        bidRepository.save(initialBid);
         tradeRepository.save(trade);
         return trade;
     }

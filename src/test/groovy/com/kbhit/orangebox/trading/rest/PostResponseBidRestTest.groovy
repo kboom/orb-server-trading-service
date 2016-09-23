@@ -50,6 +50,7 @@ class PostResponseBidRestTest extends RestTest {
                 buildItem()
                         .withId("a")
                         .withOwner(agathaUser)
+                        .withName("item a")
                         .build()
         )
 
@@ -57,6 +58,7 @@ class PostResponseBidRestTest extends RestTest {
                 buildItem()
                         .withId("b")
                         .withOwner(gregUser)
+                        .withName("item b")
                         .build()
         )
 
