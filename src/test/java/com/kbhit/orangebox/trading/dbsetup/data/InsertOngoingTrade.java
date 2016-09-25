@@ -6,6 +6,8 @@ import com.ninja_squad.dbsetup.operation.Operation;
 import org.joda.time.DateTime;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static com.kbhit.orangebox.trading.dbsetup.DbSetupUtils.DISABLE_FOREIGN_KEY_CHECKS;
+import static com.kbhit.orangebox.trading.dbsetup.DbSetupUtils.ENABLE_FOREIGN_KEY_CHECKS;
 import static com.kbhit.orangebox.trading.dbsetup.builders.BidDummyBuilder.aDummyBid;
 import static com.kbhit.orangebox.trading.dbsetup.builders.TradeDummyBuilder.aDummyTrade;
 import static com.kbhit.orangebox.trading.dbsetup.data.InsertDummyBidders.AGATA_BIDDER_ID;
@@ -48,16 +50,18 @@ public class InsertOngoingTrade {
 
     public static Operation insertAll() {
         return Operations.sequenceOf(
+                DISABLE_FOREIGN_KEY_CHECKS,
                 INSERT_TRADE,
                 INSERT_INITIAL_BID,
                 INSERT_LATEST_BID,
-                InsertDummyItems.insertAll(ONGOING_TRADE_ID)//,
-//                setRequestedItemsFor(INITIAL_BID_ID, BLUE_GREG_ITEM_ID),
-//                setOfferedItemsFor(INITIAL_BID_ID, RED_AGATHA_ITEM_ID),
-//                setRequestedItemsFor(LATEST_BID_ID, RED_AGATHA_ITEM_ID, BLUE_AGATHA_ITEM_ID),
-//                setOfferedItemsFor(LATEST_BID_ID, BLUE_GREG_ITEM_ID, RED_GREG_ITEM_ID),
-//                setInitialBidForTrade(ONGOING_TRADE_ID, INITIAL_BID_ID),
-//                setLatestBidForTrade(ONGOING_TRADE_ID, LATEST_BID_ID)
+                InsertDummyItems.insertAll(ONGOING_TRADE_ID),
+                setRequestedItemsFor(INITIAL_BID_ID, BLUE_GREG_ITEM_ID),
+                setOfferedItemsFor(INITIAL_BID_ID, RED_AGATHA_ITEM_ID),
+                setRequestedItemsFor(LATEST_BID_ID, RED_AGATHA_ITEM_ID, BLUE_AGATHA_ITEM_ID),
+                setOfferedItemsFor(LATEST_BID_ID, BLUE_GREG_ITEM_ID, RED_GREG_ITEM_ID),
+                setInitialBidForTrade(ONGOING_TRADE_ID, INITIAL_BID_ID),
+                setLatestBidForTrade(ONGOING_TRADE_ID, LATEST_BID_ID),
+                ENABLE_FOREIGN_KEY_CHECKS
         );
     }
 
