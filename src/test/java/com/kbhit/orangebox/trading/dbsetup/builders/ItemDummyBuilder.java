@@ -1,5 +1,6 @@
 package com.kbhit.orangebox.trading.dbsetup.builders;
 
+import com.ninja_squad.dbsetup.generator.ValueGenerator;
 import com.ninja_squad.dbsetup.operation.Operation;
 
 import java.util.TreeMap;
@@ -7,12 +8,15 @@ import java.util.TreeMap;
 import static com.kbhit.orangebox.trading.dbsetup.tables.ItemTable.ITEM_ID;
 import static com.kbhit.orangebox.trading.dbsetup.tables.ItemTable.ITEM_NAME;
 import static com.ninja_squad.dbsetup.Operations.insertInto;
+import static com.ninja_squad.dbsetup.generator.ValueGenerators.sequence;
 
 public class ItemDummyBuilder {
 
+    private static ValueGenerator idGenerator = sequence();
+
     private TreeMap<String, Object> orderedValuesMap = new TreeMap<>();
 
-    public ItemDummyBuilder withId(String bidderId) {
+    public ItemDummyBuilder withItemId(String bidderId) {
         orderedValuesMap.put(ITEM_ID.getColumnName(), bidderId);
         return this;
     }
@@ -24,6 +28,7 @@ public class ItemDummyBuilder {
 
     public Operation build() {
         return insertInto("ITEMS")
+                .withGeneratedValue("id", idGenerator)
                 .columns(orderedValuesMap.keySet().stream().toArray(String[]::new))
                 .values(orderedValuesMap.values().stream().toArray(Object[]::new)).build();
     }

@@ -69,7 +69,7 @@ class PostResponseBidRestTest extends RestTest {
         def request = given()
                 .pathParam("tradeId", "1")
                 .contentType(ContentType.JSON)
-                .body('{ "requestedItems" : [{ "id" : "a" }], "offeredItems": [{ "id" : "b" }] }')
+                .body('{ "requestedItems" : [{ "itemId" : "a" }], "offeredItems": [{ "itemId" : "b" }] }')
                 .header("Authorization", "Bearer " + token)
 
         when:
@@ -77,7 +77,7 @@ class PostResponseBidRestTest extends RestTest {
 
         then:
         response.then().statusCode(200)
-                .body(matchesJsonSchemaInClasspath("bid.json"));
+                .body(matchesJsonSchemaInClasspath("latestBid.json"));
     }
 
 

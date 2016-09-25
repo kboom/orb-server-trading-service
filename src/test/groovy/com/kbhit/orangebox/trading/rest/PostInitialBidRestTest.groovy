@@ -70,7 +70,7 @@ class PostInitialBidRestTest extends RestTest {
         def token = tokenProvider.createToken(new TestingAuthenticationToken("greg", "123", newArrayList(new SimpleGrantedAuthority(AuthoritiesConstants.USER))), false)
         def request = given()
                 .contentType(ContentType.JSON)
-                .body('{ "requestedItems" : [{ "id" : "a" }], "offeredItems": [{ "id" : "b" }] }')
+                .body('{ "requestedItems" : [{ "itemId" : "a" }], "offeredItems": [{ "itemId" : "b" }] }')
                 .header("Authorization", "Bearer " + token)
 
         when:
@@ -78,13 +78,13 @@ class PostInitialBidRestTest extends RestTest {
 
         then:
         response.then().statusCode(200)
-                .body(matchesJsonSchemaInClasspath("bid.json"))
-                .body("bidder.login", equalTo("greg"))
+                .body(matchesJsonSchemaInClasspath("latestBid.json"))
+                .body("placingBidder.login", equalTo("greg"))
                 .body("requestedItems", hasSize(1))
-                .body("requestedItems[0].id", equalTo("a"))
+                .body("requestedItems[0].itemId", equalTo("a"))
                 .body("requestedItems[0].name", equalTo("item a"))
                 .body("offeredItems", hasSize(1))
-                .body("offeredItems[0].id", equalTo("b"))
+                .body("offeredItems[0].itemId", equalTo("b"))
                 .body("offeredItems[0].name", equalTo("item b"));
     }
 

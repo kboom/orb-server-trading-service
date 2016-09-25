@@ -2,15 +2,15 @@ package com.kbhit.orangebox.trading.controllers.dto;
 
 public class ItemDto {
 
-    private String id;
+    private String itemId;
     private String name;
 
-    public String getId() {
-        return id;
+    public String getItemId() {
+        return itemId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
 
     public String getName() {
@@ -24,13 +24,13 @@ public class ItemDto {
 
         ItemDto itemDto = (ItemDto) o;
 
-        return id != null ? id.equals(itemDto.id) : itemDto.id == null;
+        return itemId != null ? itemId.equals(itemDto.itemId) : itemDto.itemId == null;
 
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return itemId != null ? itemId.hashCode() : 0;
     }
 
     public ItemDto setName(String name) {

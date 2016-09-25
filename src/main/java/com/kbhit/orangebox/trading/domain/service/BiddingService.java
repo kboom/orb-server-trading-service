@@ -1,6 +1,7 @@
 package com.kbhit.orangebox.trading.domain.service;
 
 import com.kbhit.orangebox.trading.domain.Bid;
+import com.kbhit.orangebox.trading.domain.CounterParties;
 import com.kbhit.orangebox.trading.domain.Trade;
 import com.kbhit.orangebox.trading.domain.TradeId;
 import com.kbhit.orangebox.trading.domain.factory.TradeFactory;
@@ -24,18 +25,17 @@ public class BiddingService {
     private BidRepository bidRepository;
 
     @Transactional
-    public Trade createTradeFor(Bid initialBid) {
-        Trade trade = tradeFactory.createTradeFor(initialBid);
-        bidRepository.save(initialBid);
+    public Trade postBidFor(TradeId tradeId, Bid bid) {
+        Trade trade = tradeRepository.findTradeById(tradeId);
+        trade.makeBid(bid);
+        bidRepository.save(bid);
         tradeRepository.save(trade);
         return trade;
     }
 
     @Transactional
-    public Trade postBidFor(TradeId tradeId, Bid bid) {
-        Trade trade = tradeRepository.findTradeById(tradeId);
-        trade.makeBid(bid);
-        bidRepository.save(bid);
+    public Trade createTradeBetween(CounterParties counterParties) {
+        Trade trade = tradeFactory.createTradeFor(counterParties);
         tradeRepository.save(trade);
         return trade;
     }

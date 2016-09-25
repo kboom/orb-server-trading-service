@@ -5,12 +5,10 @@ import com.kbhit.orangebox.trading.controllers.dto.BidDto;
 import com.kbhit.orangebox.trading.controllers.dto.ItemDto;
 import com.kbhit.orangebox.trading.domain.Bid;
 import com.kbhit.orangebox.trading.domain.BidderService;
+import com.kbhit.orangebox.trading.domain.CounterParties;
 import com.kbhit.orangebox.trading.domain.Trade;
-import com.kbhit.orangebox.trading.domain.service.BiddingContextService;
-import com.kbhit.orangebox.trading.domain.service.BiddingService;
-import com.kbhit.orangebox.trading.domain.service.TimeService;
-import com.kbhit.orangebox.trading.domain.service.Item;
-import com.kbhit.orangebox.trading.domain.service.StorageService;
+import com.kbhit.orangebox.trading.domain.repository.TradeRepository;
+import com.kbhit.orangebox.trading.domain.service.*;
 import com.kbhit.orangebox.trading.security.AuthoritiesConstants;
 import io.swagger.annotations.ApiOperation;
 import org.dozer.Mapper;
@@ -23,12 +21,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
-import static com.kbhit.orangebox.trading.domain.Bid.buildBid;
+import static com.kbhit.orangebox.trading.domain.Bid.buildBidFor;
 import static com.kbhit.orangebox.trading.domain.TradeId.referenceTrade;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 public class BiddingController {
+
+    @Autowired
+    private TradeRepository tradeRepository;
 
     @Autowired
     private BiddingService biddingService;
@@ -53,8 +54,8 @@ public class BiddingController {
     @Secured(AuthoritiesConstants.USER)
     @ResponseBody
     public ResponseEntity<BidDto> postInitialBid(@RequestBody BidDto bidDto) {
-        Bid bid = constructBid(bidDto);
-        Trade trade = biddingService.createTradeFor(bid);
+        Trade trade = biddingService.createTradeBetween(getCounterParties(bidDto));
+        trade.makeBid(createBidFor(trade, bidDto));
         return new ResponseEntity<>(mapper.map(trade.getInitialBid(), BidDto.class), HttpStatus.OK);
     }
 
@@ -63,13 +64,13 @@ public class BiddingController {
     @Secured(AuthoritiesConstants.USER)
     @ResponseBody
     public ResponseEntity<BidDto> postBid(@PathVariable("tradeId") String tradeId, @RequestBody BidDto bidDto) {
-        Bid bid = constructBid(bidDto);
-        Trade trade = biddingService.postBidFor(referenceTrade(tradeId), bid);
+        Trade trade = tradeRepository.findTradeById(referenceTrade(tradeId));
+        trade.makeBid(createBidFor(trade, bidDto));
         return new ResponseEntity<>(mapper.map(trade.getLatestBid(), BidDto.class), HttpStatus.OK);
     }
 
-    private Bid constructBid(BidDto bidDto) {
-        return buildBid(bidderService)
+    private Bid createBidFor(Trade trade, BidDto bidDto) {
+        return buildBidFor(trade)
                 .withBidder(userContextService.getBiddingUser())
                 .withPlaceDate(timeService.getCurrentTime())
                 .withOfferedItems(collectStoredItems(bidDto.getOfferedItems()))
@@ -77,8 +78,14 @@ public class BiddingController {
                 .build();
     }
 
+    private CounterParties getCounterParties(@RequestBody BidDto bidDto) {
+        return bidderService.resolveCounterParties(
+                bidDto.getPlacingBidder().getLogin(),
+                bidDto.getRespondingBidder().getLogin());
+    }
+
     private Collection<Item> collectStoredItems(Collection<ItemDto> items) {
-        return storageService.getItemsById(Lists.transform(Lists.newArrayList(items), ItemDto::getId));
+        return storageService.getItemsById(Lists.transform(Lists.newArrayList(items), ItemDto::getItemId));
     }
 
 }

@@ -14,7 +14,7 @@ import org.joda.time.DateTime
 import org.springframework.beans.factory.annotation.Autowired
 import spock.lang.Shared
 
-import static com.kbhit.orangebox.trading.domain.Bid.buildBid
+import static com.kbhit.orangebox.trading.domain.Bid.buildBidFor
 import static com.kbhit.orangebox.trading.feignstubs.TestItem.*
 import static com.kbhit.orangebox.trading.stubs.ItemBuilder.buildItem
 import static com.kbhit.orangebox.trading.stubs.UserBuilder.buildUser
@@ -53,7 +53,7 @@ class PostingInitialBidSpec extends BehaviourSpecification {
 
     def "Can create a trade from initial bid"() {
         given:
-        Bid initialBid = buildBid(bidderService)
+        Bid initialBid = buildBidFor(bidderService)
                 .withBidder(bidderService.getOrCreateBidder(greg))
                 .withRequestedItems(singletonList(firstAgathaItem))
                 .withOfferedItems(singletonList(firstGregItem))
@@ -70,7 +70,7 @@ class PostingInitialBidSpec extends BehaviourSpecification {
         def initialBidder = bidderService.getOrCreateBidder(greg)
 
         given:
-        Bid initialBid = buildBid(bidderService)
+        Bid initialBid = buildBidFor(bidderService)
                 .withBidder(initialBidder)
                 .withRequestedItems(singletonList(firstAgathaItem))
                 .withOfferedItems(singletonList(firstGregItem))
@@ -87,7 +87,7 @@ class PostingInitialBidSpec extends BehaviourSpecification {
         def requestedItemsOwner = bidderService.getOrCreateBidder(agatha)
 
         given:
-        Bid initialBid = buildBid(bidderService)
+        Bid initialBid = buildBidFor(bidderService)
                 .withBidder(bidderService.getOrCreateBidder(greg))
                 .withRequestedItems(singletonList(firstAgathaItem))
                 .withOfferedItems(singletonList(firstGregItem))
@@ -132,7 +132,7 @@ class PostingInitialBidSpec extends BehaviourSpecification {
     }
 
     private Bid createDummyBid() {
-        buildBid(bidderService)
+        buildBidFor(bidderService)
                 .withBidder(bidderService.getOrCreateBidder(greg))
                 .withRequestedItems(singletonList(firstAgathaItem))
                 .withOfferedItems(singletonList(firstGregItem))

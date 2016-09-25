@@ -11,7 +11,7 @@ import com.kbhit.orangebox.trading.stubs.ConfigurableTimeService
 import org.springframework.beans.factory.annotation.Autowired
 import spock.lang.Shared
 
-import static com.kbhit.orangebox.trading.domain.Bid.buildBid
+import static com.kbhit.orangebox.trading.domain.Bid.buildBidFor
 import static com.kbhit.orangebox.trading.feignstubs.TestItem.*
 import static com.kbhit.orangebox.trading.stubs.ItemBuilder.buildItem
 import static com.kbhit.orangebox.trading.stubs.UserBuilder.buildUser
@@ -56,7 +56,7 @@ public class PostingResponseBidSpec extends BehaviourSpecification {
 
     def "Posted bid becomes latest in trade it is posted to"() {
         given:
-        Bid responseBid = buildBid(bidderService)
+        Bid responseBid = buildBidFor(bidderService)
                 .withBidder(bidderService.getOrCreateBidder(greg))
                 .withRequestedItems(singletonList(firstAgathaItem))
                 .withOfferedItems(singletonList(firstGregItem))

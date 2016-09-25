@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Set;
 
 import static com.google.common.collect.Sets.newHashSet;
+import static com.kbhit.orangebox.trading.domain.TradedItem.traded;
 import static java.util.Collections.unmodifiableSet;
 import static java.util.stream.Collectors.toList;
 
@@ -38,14 +39,14 @@ public class Bid {
             joinColumns = @JoinColumn(name = "bid_id"),
             inverseJoinColumns = @JoinColumn(name = "item_id")
     )
-    private Set<BidItem> offeredItems;
+    private Set<TradedItem> offeredItems;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "REQUESTED_ITEMS",
             joinColumns = @JoinColumn(name = "bid_id"),
             inverseJoinColumns = @JoinColumn(name = "item_id")
     )
-    private Set<BidItem> requestedItems;
+    private Set<TradedItem> requestedItems;
 
 
     public DateTime getPlaceDate() {
@@ -60,11 +61,11 @@ public class Bid {
         return bidder;
     }
 
-    public Set<BidItem> getOfferedItems() {
+    public Set<TradedItem> getOfferedItems() {
         return unmodifiableSet(offeredItems);
     }
 
-    public Set<BidItem> getRequestedItems() {
+    public Set<TradedItem> getRequestedItems() {
         return unmodifiableSet(requestedItems);
     }
 
@@ -73,8 +74,8 @@ public class Bid {
 
     }
 
-    public static BidBuilder buildBid(BidderService bidderService) {
-        return new BidBuilder(bidderService);
+    public static BidBuilder buildBidFor(Trade trade) {
+        return new BidBuilder(trade);
     }
 
     @Override
@@ -101,10 +102,10 @@ public class Bid {
     public static class BidBuilder {
 
         private Bid bid;
-        private BidderService bidderService;
+        private Trade trade;
 
-        BidBuilder(BidderService bidderService) {
-            this.bidderService = bidderService;
+        BidBuilder(Trade trade) {
+            this.trade = trade;
             this.bid = new Bid();
             this.bid.offeredItems = newHashSet();
             this.bid.requestedItems = newHashSet();
@@ -121,23 +122,29 @@ public class Bid {
         }
 
         public BidBuilder withRequestedItems(Collection<Item> items) {
-            Bidder owningBidder = bidderService.getOwnerOf(items);
-            bid.requestedItems.addAll(items.stream().map(item -> createBidItem(item, owningBidder)).collect(toList()));
+            Bidder owningBidder = trade.getResponder();
+            ensureAllItemsBelongTo(items, owningBidder);
+            bid.requestedItems.addAll(items.stream().map(
+                    item -> traded(item).in(trade).ownedBy(owningBidder).build()
+            ).collect(toList()));
             return this;
         }
 
         public BidBuilder withOfferedItems(Collection<Item> items) {
-            Bidder owningBidder = bidderService.getOwnerOf(items);
-            bid.offeredItems.addAll(items.stream().map(item -> createBidItem(item, owningBidder)).collect(toList()));
+            Bidder owningBidder = trade.getRequester();
+            ensureAllItemsBelongTo(items, owningBidder);
+            bid.offeredItems.addAll(items.stream().map(
+                    item -> traded(item).in(trade).ownedBy(owningBidder).build()
+            ).collect(toList()));
             return this;
-        }
-
-        private BidItem createBidItem(Item item, Bidder bidder) {
-            return new BidItem(item, bidder, bid);
         }
 
         public Bid build() {
             return bid;
+        }
+
+        private void ensureAllItemsBelongTo(Collection<Item> claimedItems, Bidder owningBidder) {
+            // todo check if all claimedItems belong to owningBidder, throw custom unchecked exception otherwise
         }
 
     }

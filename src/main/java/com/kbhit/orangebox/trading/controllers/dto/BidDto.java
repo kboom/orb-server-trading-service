@@ -7,7 +7,9 @@ import java.util.Set;
 
 public class BidDto {
 
-    private BidderDto bidder;
+    private BidderDto placingBidder;
+
+    private BidderDto respondingBidder;
 
     @Valid
     @NotNull
@@ -19,12 +21,12 @@ public class BidDto {
     @Size(min = 1)
     private Set<ItemDto> offeredItems;
 
-    public BidderDto getBidder() {
-        return bidder;
+    public BidderDto getPlacingBidder() {
+        return placingBidder;
     }
 
-    public void setBidder(BidderDto bidder) {
-        this.bidder = bidder;
+    public void setPlacingBidder(BidderDto placingBidder) {
+        this.placingBidder = placingBidder;
     }
 
     public Set<ItemDto> getRequestedItems() {
@@ -43,6 +45,14 @@ public class BidDto {
     public BidDto setOfferedItems(Set<ItemDto> offeredItems) {
         this.offeredItems = offeredItems;
         return this;
+    }
+
+    public BidderDto getRespondingBidder() {
+        return respondingBidder;
+    }
+
+    public void setRespondingBidder(BidderDto respondingBidder) {
+        this.respondingBidder = respondingBidder;
     }
 
     @Override

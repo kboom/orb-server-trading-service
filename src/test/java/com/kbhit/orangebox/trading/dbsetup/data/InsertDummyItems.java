@@ -13,22 +13,22 @@ class InsertDummyItems {
     static final String BLUE_GREG_ITEM_ID = "BLUE GREG ITEM";
 
     private static final Operation RED_AGATHA_ITEM = aDummyItem()
-            .withId(RED_AGATHA_ITEM_ID)
+            .withItemId(RED_AGATHA_ITEM_ID)
             .withName("Red Agatha's item")
             .build();
 
     private static final Operation BLUE_AGATHA_ITEM = aDummyItem()
-            .withId(BLUE_AGATHA_ITEM_ID)
+            .withItemId(BLUE_AGATHA_ITEM_ID)
             .withName("Blue Agatha's item")
             .build();
 
     private static final Operation RED_GREG_ITEM = aDummyItem()
-            .withId(RED_GREG_ITEM_ID)
+            .withItemId(RED_GREG_ITEM_ID)
             .withName("Red Greg's item")
             .build();
 
     private static final Operation BLUE_GREG_ITEM = aDummyItem()
-            .withId(BLUE_GREG_ITEM_ID)
+            .withItemId(BLUE_GREG_ITEM_ID)
             .withName("Blue Greg's item")
             .build();
 

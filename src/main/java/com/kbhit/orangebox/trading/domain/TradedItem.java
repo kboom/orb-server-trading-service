@@ -1,0 +1,90 @@
+package com.kbhit.orangebox.trading.domain;
+
+import com.kbhit.orangebox.trading.domain.service.Item;
+
+import javax.persistence.*;
+
+import static com.kbhit.orangebox.trading.domain.TradedItemId.tradedItemId;
+
+@Entity
+@Table(name = "TRADED_ITEMS")
+public class TradedItem {
+
+    @EmbeddedId
+    private TradedItemId tradedItemId;
+
+    @ManyToOne
+    @JoinColumn(name = "trade_id")
+    private Trade trade;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private Bidder owner;
+
+    @ManyToOne
+    @JoinColumn(name = "latest_bid_id")
+    private Bid latestBid;
+
+    private String name;
+
+    private TradedItem(TradedItemId tradedItemId) {
+        this.tradedItemId = tradedItemId;
+    }
+
+    public ItemId getItemId() {
+        return tradedItemId.getItemId();
+    }
+
+
+    public Bidder getOwner() {
+        return owner;
+    }
+
+    public Bid getLatestBid() {
+        return latestBid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @SuppressWarnings("unused")
+    TradedItem() {
+
+    }
+
+    static class TradedItemBuilder {
+
+        private final Item item;
+        private Trade trade;
+        private Bidder owningBidder;
+
+        TradedItemBuilder(Item item) {
+            this.item = item;
+        }
+
+        TradedItemBuilder in(Trade trade) {
+            this.trade = trade;
+            return this;
+        }
+
+        TradedItemBuilder ownedBy(Bidder owningBidder) {
+            this.owningBidder = owningBidder;
+            return this;
+        }
+
+        public TradedItem build() {
+            TradedItem tradedItem = new TradedItem(tradedItemId(trade.getId(), item.getId()));
+            tradedItem.name = item.getName();
+            tradedItem.owner = owningBidder;
+            tradedItem.trade = trade;
+            return tradedItem;
+        }
+
+    }
+
+    static TradedItemBuilder traded(Item item) {
+        return new TradedItemBuilder(item);
+    }
+
+}

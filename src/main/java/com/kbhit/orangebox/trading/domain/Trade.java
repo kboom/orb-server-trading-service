@@ -20,9 +20,12 @@ public class Trade {
 
     private DateTime updateDate;
 
+    private TradeState tradeState;
+
     public Trade(TradeId id) {
         this.id = id;
         this.historicBids = newArrayList();
+        this.tradeState = TradeState.INITIAL;
     }
 
     @OneToOne
@@ -81,6 +84,9 @@ public class Trade {
     }
 
     public void makeBid(Bid bid) {
+        if(initialBid == null) {
+            initialBid = bid;
+        }
         latestBid = bid;
         historicBids.add(bid);
     }
@@ -91,13 +97,6 @@ public class Trade {
 
         private TradeBuilder(TradeId tradeId) {
             trade = new Trade(tradeId);
-        }
-
-        public TradeBuilder withInitialBid(Bid initialBid) {
-            trade.initialBid = initialBid;
-            trade.latestBid = initialBid;
-            trade.historicBids.add(initialBid);
-            return this;
         }
 
         public TradeBuilder createdOn(ReadableDateTime createDate) {
@@ -129,6 +128,12 @@ public class Trade {
     @SuppressWarnings("unused")
     Trade() {
 
+    }
+
+    public enum TradeState {
+        INVALID,
+        INITIAL,
+        SETTLED
     }
 
 }

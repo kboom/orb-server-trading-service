@@ -1,5 +1,6 @@
 package com.kbhit.orangebox.trading.domain.service;
 
+import com.kbhit.orangebox.trading.domain.ItemId;
 import com.kbhit.orangebox.trading.domain.User;
 
 public class Item {
@@ -7,8 +8,8 @@ public class Item {
     private String name;
     private User owner;
 
-    public String getId() {
-        return id;
+    public ItemId getId() {
+        return ItemId.itemId(id);
     }
 
     public String getName() {
