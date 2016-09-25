@@ -4,8 +4,9 @@ import java.util.Arrays;
 
 public enum OfferedItemsTable {
 
+    BID_ID("BID_ID"),
     ITEM_ID("ITEM_ID"),
-    BID_ID("BID_ID");
+    TRADE_ID("TRADE_ID");
 
     String columnName;
 

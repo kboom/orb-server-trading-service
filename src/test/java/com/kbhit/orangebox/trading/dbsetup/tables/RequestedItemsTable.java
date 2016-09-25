@@ -5,7 +5,8 @@ import java.util.Arrays;
 public enum RequestedItemsTable {
 
     BID_ID("BID_ID"),
-    ITEM_ID("ITEM_ID");
+    ITEM_ID("ITEM_ID"),
+    TRADE_ID("TRADE_ID");
 
     String columnName;
 

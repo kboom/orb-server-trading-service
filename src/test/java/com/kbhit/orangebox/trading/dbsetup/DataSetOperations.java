@@ -10,7 +10,7 @@ class DataSetOperations {
     private static final Operation DELETE_BIDS = deleteAllFrom("BIDS");
     private static final Operation DELETE_TRADES = deleteAllFrom("TRADES");
     private static final Operation DELETE_BIDDERS = deleteAllFrom("BIDDERS");
-    private static final Operation DELETE_ITEMS = deleteAllFrom("ITEMS");
+    private static final Operation DELETE_ITEMS = deleteAllFrom("TRADED_ITEMS");
     private static final Operation DELETE_OFFERED_ITEMS = deleteAllFrom("OFFERED_ITEMS");
     private static final Operation DELETE_REQUESTED_ITEMS = deleteAllFrom("REQUESTED_ITEMS");
 
@@ -19,7 +19,7 @@ class DataSetOperations {
 
     static final Operation DELETE_ALL_DATA = Operations.sequenceOf(
             DISABLE_FOREIGN_KEY_CHECKS,
-            Operations.truncate("TRADES", "BIDS", "BIDDERS", "ITEMS", "OFFERED_ITEMS", "REQUESTED_ITEMS"),
+            Operations.truncate("TRADES", "BIDS", "BIDDERS", "TRADED_ITEMS", "OFFERED_ITEMS", "REQUESTED_ITEMS"),
             ENABLE_FOREIGN_KEY_CHECKS
     );
 

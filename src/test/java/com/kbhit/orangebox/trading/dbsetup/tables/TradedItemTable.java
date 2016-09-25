@@ -2,15 +2,16 @@ package com.kbhit.orangebox.trading.dbsetup.tables;
 
 import java.util.Arrays;
 
-public enum ItemTable {
+public enum TradedItemTable {
 
     ITEM_ID("ITEM_ID"),
+    TRADE_ID("TRADE_ID"),
     ITEM_NAME("NAME");
 
     String columnName;
 
 
-    ItemTable(String columnName) {
+    TradedItemTable(String columnName) {
         this.columnName = columnName;
     }
 
@@ -19,7 +20,7 @@ public enum ItemTable {
     }
 
     public static String[] allColumns() {
-        return Arrays.stream(values()).map(ItemTable::getColumnName).toArray(String[]::new);
+        return Arrays.stream(values()).map(TradedItemTable::getColumnName).toArray(String[]::new);
     }
 
 }

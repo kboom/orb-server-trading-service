@@ -11,8 +11,11 @@ import static com.kbhit.orangebox.trading.dbsetup.builders.TradeDummyBuilder.aDu
 import static com.kbhit.orangebox.trading.dbsetup.data.InsertDummyBidders.AGATA_BIDDER_ID;
 import static com.kbhit.orangebox.trading.dbsetup.data.InsertDummyBidders.GRZEGORZ_BIDDER_ID;
 import static com.kbhit.orangebox.trading.dbsetup.data.InsertDummyItems.*;
+import static com.kbhit.orangebox.trading.dbsetup.tables.RequestedItemsTable.TRADE_ID;
 import static com.kbhit.orangebox.trading.dbsetup.tables.RequestedItemsTable.allColumns;
+import static com.ninja_squad.dbsetup.Operations.insertInto;
 import static com.ninja_squad.dbsetup.Operations.sql;
+import static java.lang.String.format;
 
 public class InsertOngoingTrade {
 
@@ -48,13 +51,13 @@ public class InsertOngoingTrade {
                 INSERT_TRADE,
                 INSERT_INITIAL_BID,
                 INSERT_LATEST_BID,
-                InsertDummyItems.insertAll(),
-                setRequestedItemsFor(INITIAL_BID_ID, BLUE_GREG_ITEM_ID),
-                setOfferedItemsFor(INITIAL_BID_ID, RED_AGATHA_ITEM_ID),
-                setRequestedItemsFor(LATEST_BID_ID, RED_AGATHA_ITEM_ID, BLUE_AGATHA_ITEM_ID),
-                setOfferedItemsFor(LATEST_BID_ID, BLUE_GREG_ITEM_ID, RED_GREG_ITEM_ID),
-                setInitialBidForTrade(ONGOING_TRADE_ID, INITIAL_BID_ID),
-                setLatestBidForTrade(ONGOING_TRADE_ID, LATEST_BID_ID)
+                InsertDummyItems.insertAll(ONGOING_TRADE_ID)//,
+//                setRequestedItemsFor(INITIAL_BID_ID, BLUE_GREG_ITEM_ID),
+//                setOfferedItemsFor(INITIAL_BID_ID, RED_AGATHA_ITEM_ID),
+//                setRequestedItemsFor(LATEST_BID_ID, RED_AGATHA_ITEM_ID, BLUE_AGATHA_ITEM_ID),
+//                setOfferedItemsFor(LATEST_BID_ID, BLUE_GREG_ITEM_ID, RED_GREG_ITEM_ID),
+//                setInitialBidForTrade(ONGOING_TRADE_ID, INITIAL_BID_ID),
+//                setLatestBidForTrade(ONGOING_TRADE_ID, LATEST_BID_ID)
         );
     }
 
@@ -67,17 +70,16 @@ public class InsertOngoingTrade {
     }
 
     private static Operation setLatestBidForTrade(String tradeId, Integer bidId) {
-        return sql(String.format("UPDATE TRADES SET LATEST_BID_ID = %d where trade_id = %s", bidId, tradeId));
+        return sql(format("UPDATE TRADES SET LATEST_BID_ID = %d where trade_id = %s", bidId, tradeId));
     }
 
     private static Operation setInitialBidForTrade(String tradeId, Integer bidId) {
-        return sql(String.format("UPDATE TRADES SET INITIAL_BID_ID = %d where trade_id = %s", bidId, tradeId));
+        return sql(format("UPDATE TRADES SET INITIAL_BID_ID = %d where trade_id = %s", bidId, tradeId));
     }
 
     private static Operation createBindItemsToBidOperation(String tableName, Integer bidId, String... itemIds) {
-        Insert.Builder insertBuilder = Operations.insertInto(tableName)
-                .columns(allColumns());
-        newArrayList(itemIds).forEach(id -> insertBuilder.values(bidId, id));
+        Insert.Builder insertBuilder = insertInto(tableName).columns(allColumns());
+        newArrayList(itemIds).forEach(id -> insertBuilder.values(bidId, id, ONGOING_TRADE_ID));
         return insertBuilder.build();
     }
 
