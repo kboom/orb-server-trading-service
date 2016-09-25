@@ -14,11 +14,11 @@ public class TradedItem {
     private TradedItemId tradedItemId;
 
     @ManyToOne
-    @JoinColumn(name = "trade_id")
+    @JoinColumn(name = "trade_id", insertable = false, updatable = false)
     private Trade trade;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id")
+    @JoinColumn(name = "owner_id", insertable = false, updatable = false)
     private Bidder owner;
 
     @ManyToOne

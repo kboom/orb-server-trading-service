@@ -37,14 +37,14 @@ public class Bid {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "OFFERED_ITEMS",
             joinColumns = @JoinColumn(name = "bid_id"),
-            inverseJoinColumns = @JoinColumn(name = "item_id")
+            inverseJoinColumns = { @JoinColumn(name = "trade_id"), @JoinColumn(name = "item_id") }
     )
     private Set<TradedItem> offeredItems;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "REQUESTED_ITEMS",
             joinColumns = @JoinColumn(name = "bid_id"),
-            inverseJoinColumns = @JoinColumn(name = "item_id")
+            inverseJoinColumns = { @JoinColumn(name = "trade_id"), @JoinColumn(name = "item_id") }
     )
     private Set<TradedItem> requestedItems;
 

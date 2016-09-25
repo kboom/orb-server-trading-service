@@ -1,15 +1,18 @@
 package com.kbhit.orangebox.trading.domain;
 
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Embeddable
-public class TradedItemId {
+public class TradedItemId implements Serializable {
 
     @Embedded
     private ItemId itemId;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "tradeId", column = @Column(name = "trade_id"))
+    })
     private TradeId tradeId;
 
     private TradedItemId(TradeId tradeId, ItemId itemId) {

@@ -44,7 +44,7 @@ public class StorageServiceStubber {
 
     private UrlPattern getUrlForItems(Item[] items) {
         String rawUrl = format("/items/[%s]", Arrays.stream(items)
-                .map(Item::getId).collect(Collectors.joining(",")));
+                .map(item -> item.getId().rawValue()).collect(Collectors.joining(",")));
         return urlEqualTo(withEncodedBrackets(rawUrl));
     }
 

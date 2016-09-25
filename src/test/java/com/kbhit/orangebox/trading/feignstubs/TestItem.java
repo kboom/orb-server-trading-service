@@ -2,6 +2,7 @@ package com.kbhit.orangebox.trading.feignstubs;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.kbhit.orangebox.trading.domain.ItemId;
 import com.kbhit.orangebox.trading.domain.service.Item;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Map;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.newHashSet;
+import static com.kbhit.orangebox.trading.domain.ItemId.itemId;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -25,7 +27,7 @@ public enum TestItem {
     TestItem(String id) {
         this.id = id;
         this.item = mock(Item.class);
-        when(item.getId()).thenReturn(id);
+        when(item.getId()).thenReturn(itemId(id));
     }
 
     public String getId() {
