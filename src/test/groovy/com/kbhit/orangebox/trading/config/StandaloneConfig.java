@@ -1,8 +1,8 @@
 package com.kbhit.orangebox.trading.config;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
-import com.kbhit.orangebox.trading.feignstubs.StorageServiceStubber;
-import com.kbhit.orangebox.trading.feignstubs.UserServiceStubber;
+import com.kbhit.orangebox.trading.stubs.feign.StorageServiceStubber;
+import com.kbhit.orangebox.trading.stubs.feign.UserServiceStubber;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

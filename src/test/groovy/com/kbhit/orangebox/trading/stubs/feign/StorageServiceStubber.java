@@ -1,4 +1,4 @@
-package com.kbhit.orangebox.trading.feignstubs;
+package com.kbhit.orangebox.trading.stubs.feign;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.WireMockServer;

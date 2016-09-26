@@ -2,7 +2,7 @@ package com.kbhit.orangebox.trading.domain;
 
 import com.kbhit.orangebox.trading.TestDataLoader;
 import com.kbhit.orangebox.trading.domain.repository.BidderRepository;
-import com.kbhit.orangebox.trading.stubs.DummyUsers;
+import com.kbhit.orangebox.trading.stubs.domain.DummyUsers;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

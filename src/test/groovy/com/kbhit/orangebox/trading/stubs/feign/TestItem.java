@@ -1,8 +1,7 @@
-package com.kbhit.orangebox.trading.feignstubs;
+package com.kbhit.orangebox.trading.stubs.feign;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.kbhit.orangebox.trading.domain.ItemId;
 import com.kbhit.orangebox.trading.domain.service.Item;
 
 import java.util.List;

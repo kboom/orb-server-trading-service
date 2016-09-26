@@ -1,4 +1,4 @@
-package com.kbhit.orangebox.trading.stubs;
+package com.kbhit.orangebox.trading.stubs.domain;
 
 import com.kbhit.orangebox.trading.domain.Authority;
 import com.kbhit.orangebox.trading.domain.User;
