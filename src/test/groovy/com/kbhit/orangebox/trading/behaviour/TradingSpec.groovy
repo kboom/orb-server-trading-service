@@ -1,15 +1,14 @@
 package com.kbhit.orangebox.trading.behaviour
 
 import com.kbhit.orangebox.trading.TestDataLoader
-
 import com.kbhit.orangebox.trading.domain.Bidder
 import com.kbhit.orangebox.trading.domain.BidderService
 import com.kbhit.orangebox.trading.domain.CounterParties
 import com.kbhit.orangebox.trading.domain.Trade
+import com.kbhit.orangebox.trading.domain.repository.BidderRepository
 import com.kbhit.orangebox.trading.domain.service.BiddingService
 import com.kbhit.orangebox.trading.domain.service.StorageService
 import com.kbhit.orangebox.trading.stubs.ConfigurableTimeService
-import com.kbhit.orangebox.trading.stubs.domain.dummies.DummyUsers
 import org.springframework.beans.factory.annotation.Autowired
 
 import static org.assertj.core.api.Assertions.assertThat
@@ -29,12 +28,12 @@ class TradingSpec extends BehaviourSpecification {
     ConfigurableTimeService timeService;
 
     @Autowired
-    DummyUsers dummyUsers
+    BidderRepository bidderRepository;
 
     def "Can create a trade"() {
         given:
-        final Bidder requester = bidderService.getOrCreateBidder(dummyUsers.agathaUser().build())
-        final Bidder responder = bidderService.getOrCreateBidder(dummyUsers.gregUser().build())
+        final Bidder requester = bidderRepository.findByLogin("agatha").get()
+        final Bidder responder = bidderRepository.findByLogin("greg").get()
         CounterParties counterParties = new CounterParties(requester, responder)
 
         when:
