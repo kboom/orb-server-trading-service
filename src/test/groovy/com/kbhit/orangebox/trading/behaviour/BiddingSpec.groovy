@@ -1,65 +1,74 @@
 package com.kbhit.orangebox.trading.behaviour
 
 import com.kbhit.orangebox.trading.TestDataLoader
-import com.kbhit.orangebox.trading.stubs.domain.dummies.DummyBids
-import com.kbhit.orangebox.trading.stubs.domain.dummies.DummyItems
-import com.kbhit.orangebox.trading.stubs.domain.dummies.DummyTrades
-import com.kbhit.orangebox.trading.dbsetup.data.InsertOngoingTrade
 import com.kbhit.orangebox.trading.domain.Bid
 import com.kbhit.orangebox.trading.domain.BidderService
 import com.kbhit.orangebox.trading.domain.Trade
-import com.kbhit.orangebox.trading.domain.TradeId
+import com.kbhit.orangebox.trading.domain.repository.TradeRepository
 import com.kbhit.orangebox.trading.domain.service.BiddingService
 import com.kbhit.orangebox.trading.domain.service.StorageService
 import com.kbhit.orangebox.trading.stubs.ConfigurableTimeService
+import com.kbhit.orangebox.trading.stubs.domain.dummies.DummyBids
+import com.kbhit.orangebox.trading.stubs.domain.dummies.DummyItems
+import com.kbhit.orangebox.trading.stubs.domain.dummies.DummyTrades
+import com.kbhit.orangebox.trading.stubs.domain.dummies.DummyUsers
 import org.springframework.beans.factory.annotation.Autowired
 
-import static com.google.common.collect.Lists.newArrayList
-import static com.kbhit.orangebox.trading.domain.Bid.buildBidFor
 import static org.assertj.core.api.Assertions.assertThat
 
 public class BiddingSpec extends BehaviourSpecification {
 
     @Autowired
-    BiddingService biddingService;
+    TradeRepository tradeRepository
 
     @Autowired
-    StorageService storageService;
+    BiddingService biddingService
 
     @Autowired
-    BidderService bidderService;
+    StorageService storageService
 
     @Autowired
-    ConfigurableTimeService timeService;
+    BidderService bidderService
 
     @Autowired
-    DummyTrades dummyTrades;
+    ConfigurableTimeService timeService
+
+    @Autowired
+    DummyTrades dummyTrades
 
     @Autowired
     DummyBids dummyBids
 
     @Autowired
-    DummyItems dummyItems;
+    DummyItems dummyItems
+
+    @Autowired
+    DummyUsers dummyUsers
 
 
     def "Bid becomes initial when posted to a new trade"() {
         given:
-        Trade emptyTrade = dummyTrades.createEmptyTrade()
-        Bid initialBid = dummyBids.dummyBid().with().build();
-
-
-
-                buildBidFor(emptyTrade)
-                .withBidder(emptyTrade.getRequester())
-                .withOfferedItems(newArrayList(dummyItems.dummyItemOwnedBy(agatha)))
-                .withRequestedItems(newArrayList(DummyItems.firstAgathaItem))
-                .build();
+        Trade trade = dummyTrades.dummyInitialTrade()
+        Bid bid = dummyBids.dummyRequesterBidFor(trade).build()
 
         when:
-        Trade trade = biddingService.postBidFor(TradeId.referenceTrade(InsertOngoingTrade.ONGOING_TRADE_ID), initialBid)
+        trade.makeBid(bid)
 
         then:
-        assertThat(trade.getLatestBid()).isEqualTo(initialBid);
+        assertThat(trade.getInitialBid()).isEqualTo(bid)
+    }
+
+    def "Bid becomes latest when posted to a trade but is not made initial"() {
+        given:
+        Trade trade = dummyTrades.dummyOngoingTrade()
+        Bid bid = dummyBids.dummyResponderBidFor(trade).build()
+
+        when:
+        trade.makeBid(bid)
+
+        then:
+        assertThat(trade.getLatestBid()).isEqualTo(bid)
+        assertThat(trade.getInitialBid()).isNotEqualTo(bid)
     }
 
     @Override
