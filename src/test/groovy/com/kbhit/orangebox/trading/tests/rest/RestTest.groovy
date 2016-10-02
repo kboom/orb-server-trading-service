@@ -1,4 +1,4 @@
-package com.kbhit.orangebox.trading.rest
+package com.kbhit.orangebox.trading.tests.rest
 
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.jayway.restassured.RestAssured

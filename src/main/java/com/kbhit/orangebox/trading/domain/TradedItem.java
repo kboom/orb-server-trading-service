@@ -4,6 +4,7 @@ import com.kbhit.orangebox.trading.domain.service.Item;
 
 import javax.persistence.*;
 
+import static com.kbhit.orangebox.trading.domain.ItemId.itemId;
 import static com.kbhit.orangebox.trading.domain.TradedItemId.tradedItemId;
 
 @Entity
@@ -74,7 +75,7 @@ public class TradedItem {
         }
 
         public TradedItem build() {
-            TradedItem tradedItem = new TradedItem(tradedItemId(trade.getId(), item.getId()));
+            TradedItem tradedItem = new TradedItem(tradedItemId(trade.getId(), itemId(item.getId())));
             tradedItem.name = item.getName();
             tradedItem.owner = owningBidder;
             tradedItem.trade = trade;

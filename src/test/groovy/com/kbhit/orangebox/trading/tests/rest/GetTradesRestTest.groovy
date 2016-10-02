@@ -1,4 +1,4 @@
-package com.kbhit.orangebox.trading.rest
+package com.kbhit.orangebox.trading.tests.rest
 
 import com.kbhit.orangebox.trading.dbsetup.DbSetupTestDataLoader
 import com.kbhit.orangebox.trading.security.AuthoritiesConstants

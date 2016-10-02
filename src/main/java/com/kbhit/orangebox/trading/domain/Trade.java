@@ -91,6 +91,16 @@ public class Trade {
         historicBids.add(bid);
     }
 
+    public Bidder getCounterPartyFor(Bidder bidder) {
+        if(requester.equals(bidder)) {
+            return requester;
+        } else if(responder.equals(bidder)) {
+            return responder;
+        } else {
+            throw new IllegalBidderException(this, bidder);
+        }
+    }
+
     public static class TradeBuilder {
 
         private Trade trade;

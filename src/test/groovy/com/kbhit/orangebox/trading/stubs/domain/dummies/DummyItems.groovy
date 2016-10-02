@@ -15,11 +15,15 @@ class DummyItems {
         return [1..3].collect { i -> dummyItem(getUserForBidder(bidder), String.valueOf(i)) }
     }
 
+    static Item[] someItemsBelongingTo(User user) {
+        return [1..3].collect { i -> dummyItem(user, String.valueOf(i)) }
+    }
+
     static Item dummyItem(User owner, String id) {
         return anItem()
-                .withId(owner.getUsername() + "_" + id)
+                .withId(id)
                 .withOwner(owner)
-                .withName("dummy item")
+                .withName("item $id")
                 .build();
     }
 

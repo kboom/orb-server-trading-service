@@ -57,16 +57,20 @@ public class Bid {
         return trade;
     }
 
-    public Bidder getBidder() {
-        return bidder;
-    }
-
     public Set<TradedItem> getOfferedItems() {
         return unmodifiableSet(offeredItems);
     }
 
     public Set<TradedItem> getRequestedItems() {
         return unmodifiableSet(requestedItems);
+    }
+
+    public Bidder getPlacingBidder() {
+        return bidder;
+    }
+
+    public Bidder getRespondingBidder() {
+        return trade.getCounterPartyFor(bidder);
     }
 
     @SuppressWarnings("unused")
@@ -105,8 +109,8 @@ public class Bid {
         private Trade trade;
 
         BidBuilder(Trade trade) {
-            this.trade = trade;
             this.bid = new Bid();
+            this.trade = trade;
             this.bid.offeredItems = newHashSet();
             this.bid.requestedItems = newHashSet();
         }
@@ -140,6 +144,7 @@ public class Bid {
         }
 
         public Bid build() {
+            bid.trade = trade;
             return bid;
         }
 

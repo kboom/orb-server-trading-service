@@ -1,4 +1,4 @@
-package com.kbhit.orangebox.trading.behaviour
+package com.kbhit.orangebox.trading.tests.behaviour
 
 import com.kbhit.orangebox.trading.TestDataLoader
 import com.kbhit.orangebox.trading.domain.Bid

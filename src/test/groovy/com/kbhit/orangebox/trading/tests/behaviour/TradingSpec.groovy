@@ -1,4 +1,4 @@
-package com.kbhit.orangebox.trading.behaviour
+package com.kbhit.orangebox.trading.tests.behaviour
 
 import com.kbhit.orangebox.trading.TestDataLoader
 import com.kbhit.orangebox.trading.domain.Bidder
@@ -30,7 +30,7 @@ class TradingSpec extends BehaviourSpecification {
     @Autowired
     BidderRepository bidderRepository;
 
-    def "Can create a trade"() {
+    def "Can create a trade between two bidders"() {
         given:
         final Bidder requester = bidderRepository.findByLogin("agatha").get()
         final Bidder responder = bidderRepository.findByLogin("greg").get()
