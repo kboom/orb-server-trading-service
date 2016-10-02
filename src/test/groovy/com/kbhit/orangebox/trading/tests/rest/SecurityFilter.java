@@ -28,12 +28,14 @@ public class SecurityFilter implements Filter {
         return ctx.next(requestSpec, responseSpec);
     }
 
-    public void setLogin(String login) {
+    public SecurityFilter setLogin(String login) {
         this.login = login;
+        return this;
     }
 
-    public void setPassword(String password) {
+    public SecurityFilter setPassword(String password) {
         this.password = password;
+        return this;
     }
 
 }

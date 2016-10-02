@@ -16,13 +16,16 @@ public class RestTestDriver {
 
     public void thereAreUsers(User... users) {
         users.each { user -> userServiceStubber.stubUser(user) }
-        [ users.toList(), users.toList() ].combinations().each {
+        [users.toList(), users.toList()].combinations().each {
             combinationOfUsers -> userServiceStubber.stubUsers(combinationOfUsers as User[])
         }
     }
 
     public void thereAreItems(Item... items) {
         items.each { item -> storageServiceStubber.stubItems(item) }
+        [items.toList(), items.toList()].combinations().each {
+            combinationOfItems -> storageServiceStubber.stubItems(combinationOfItems as Item[])
+        }
     }
 
 }

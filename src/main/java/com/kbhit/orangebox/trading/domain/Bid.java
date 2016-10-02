@@ -6,8 +6,11 @@ import org.joda.time.ReadableDateTime;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.newHashSet;
 import static com.kbhit.orangebox.trading.domain.TradedItem.traded;
 import static java.util.Collections.unmodifiableSet;
@@ -64,6 +67,8 @@ public class Bid {
     )
     private Set<TradedItem> requestedItems;
 
+    @Transient
+    private Comparator<TradedItem> itemSorter = new ByNameTradedItemComparator();
 
     public DateTime getPlaceDate() {
         return placeDate;
@@ -79,6 +84,18 @@ public class Bid {
 
     public Set<TradedItem> getRequestedItems() {
         return unmodifiableSet(requestedItems);
+    }
+
+    public List<TradedItem> getOfferedItemsSorted() {
+        List<TradedItem> sortedItems = newArrayList(offeredItems);
+        sortedItems.sort(itemSorter);
+        return sortedItems;
+    }
+
+    public List<TradedItem> getRequestedItemsSorted() {
+        List<TradedItem> sortedItems = newArrayList(requestedItems);
+        sortedItems.sort(itemSorter);
+        return sortedItems;
     }
 
     public Bidder getPlacingBidder() {

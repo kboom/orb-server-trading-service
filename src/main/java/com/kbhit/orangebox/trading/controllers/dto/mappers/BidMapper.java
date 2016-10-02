@@ -13,7 +13,11 @@ public class BidMapper extends BeanMappingBuilder {
 
     @Override
     protected void configure() {
-        mapping(Bid.class, BidDto.class);
+        mapping(Bid.class, BidDto.class)
+                .exclude("requestedItems")
+                .exclude("offeredItems")
+                .fields("requestedItemsSorted", "requestedItems")
+                .fields("offeredItemsSorted", "offeredItems");
     }
 
 }
