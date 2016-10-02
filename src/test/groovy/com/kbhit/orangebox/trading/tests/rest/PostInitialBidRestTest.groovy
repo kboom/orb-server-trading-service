@@ -42,7 +42,7 @@ class PostInitialBidRestTest extends RestTest {
         restTestDriver.thereAreItems(dummyItem(greg, "g-1"))
 
         def request = given().
-                filter(securityFilter)
+                filter(securityFilter.setLogin("greg"))
                 .contentType(ContentType.JSON)
                 .body('{ "placingBidder": { "login" : "greg" }, "respondingBidder" : { "login" : "agatha" }, "requestedItems" : [{ "itemId" : "a-1" }], "offeredItems": [{ "itemId" : "g-1" }] }');
 
