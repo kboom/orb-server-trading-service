@@ -7,6 +7,9 @@ import java.io.Serializable;
 public class TradedItemId implements Serializable {
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "itemId", column = @Column(name = "item_id"))
+    })
     private ItemId itemId;
 
     @Embedded
@@ -45,5 +48,9 @@ public class TradedItemId implements Serializable {
 
     public ItemId getItemId() {
         return itemId;
+    }
+
+    @SuppressWarnings("unused")
+    TradedItemId() {
     }
 }

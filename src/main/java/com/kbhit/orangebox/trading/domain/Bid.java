@@ -34,17 +34,33 @@ public class Bid {
     @JoinColumn(name = "bidder_id")
     private Bidder bidder;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany
     @JoinTable(name = "OFFERED_ITEMS",
-            joinColumns = @JoinColumn(name = "bid_id"),
-            inverseJoinColumns = { @JoinColumn(name = "trade_id"), @JoinColumn(name = "item_id") }
+            joinColumns = @JoinColumn(name = "bid_id", referencedColumnName = "bid_id"),
+            inverseJoinColumns = {
+                    @JoinColumn(
+                            name = "trade_id",
+                            referencedColumnName = "trade_id"
+                    ),
+                    @JoinColumn(
+                            name = "item_id",
+                            referencedColumnName = "item_id"
+                    )}
     )
     private Set<TradedItem> offeredItems;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany
     @JoinTable(name = "REQUESTED_ITEMS",
-            joinColumns = @JoinColumn(name = "bid_id"),
-            inverseJoinColumns = { @JoinColumn(name = "trade_id"), @JoinColumn(name = "item_id") }
+            joinColumns = @JoinColumn(name = "bid_id", referencedColumnName = "bid_id"),
+            inverseJoinColumns = {
+                    @JoinColumn(
+                            name = "trade_id",
+                            referencedColumnName = "trade_id"
+                    ),
+                    @JoinColumn(
+                            name = "item_id",
+                            referencedColumnName = "item_id"
+                    )}
     )
     private Set<TradedItem> requestedItems;
 

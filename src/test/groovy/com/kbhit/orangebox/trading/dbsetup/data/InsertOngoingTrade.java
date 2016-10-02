@@ -1,5 +1,7 @@
 package com.kbhit.orangebox.trading.dbsetup.data;
 
+import com.kbhit.orangebox.trading.dbsetup.tables.OfferedItemsTable;
+import com.kbhit.orangebox.trading.dbsetup.tables.RequestedItemsTable;
 import com.ninja_squad.dbsetup.Operations;
 import com.ninja_squad.dbsetup.operation.Insert;
 import com.ninja_squad.dbsetup.operation.Operation;
@@ -66,11 +68,11 @@ public class InsertOngoingTrade {
     }
 
     private static Operation setRequestedItemsFor(Integer bidId, String... itemIds) {
-        return createBindItemsToBidOperation("REQUESTED_ITEMS", bidId, itemIds);
+        return bindRequestedItemsToBid(bidId, itemIds);
     }
 
     private static Operation setOfferedItemsFor(Integer bidId, String... itemIds) {
-        return createBindItemsToBidOperation("OFFERED_ITEMS", bidId, itemIds);
+        return bindOfferedItemsToBid(bidId, itemIds);
     }
 
     private static Operation setLatestBidForTrade(String tradeId, Integer bidId) {
@@ -81,8 +83,14 @@ public class InsertOngoingTrade {
         return sql(format("UPDATE TRADES SET INITIAL_BID_ID = %d where trade_id = %s", bidId, tradeId));
     }
 
-    private static Operation createBindItemsToBidOperation(String tableName, Integer bidId, String... itemIds) {
-        Insert.Builder insertBuilder = insertInto(tableName).columns(allColumns());
+    private static Operation bindRequestedItemsToBid(Integer bidId, String... itemIds) {
+        Insert.Builder insertBuilder = insertInto("REQUESTED_ITEMS").columns(RequestedItemsTable.allColumns());
+        newArrayList(itemIds).forEach(id -> insertBuilder.values(bidId, id, ONGOING_TRADE_ID));
+        return insertBuilder.build();
+    }
+
+    private static Operation bindOfferedItemsToBid(Integer bidId, String... itemIds) {
+        Insert.Builder insertBuilder = insertInto("OFFERED_ITEMS").columns(OfferedItemsTable.allColumns());
         newArrayList(itemIds).forEach(id -> insertBuilder.values(bidId, id, ONGOING_TRADE_ID));
         return insertBuilder.build();
     }

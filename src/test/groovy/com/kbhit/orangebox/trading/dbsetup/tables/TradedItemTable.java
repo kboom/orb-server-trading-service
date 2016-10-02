@@ -6,7 +6,8 @@ public enum TradedItemTable {
 
     ITEM_ID("ITEM_ID"),
     TRADE_ID("TRADE_ID"),
-    ITEM_NAME("NAME");
+    ITEM_NAME("NAME"),
+    OWNER_ID("OWNER_ID");
 
     String columnName;
 

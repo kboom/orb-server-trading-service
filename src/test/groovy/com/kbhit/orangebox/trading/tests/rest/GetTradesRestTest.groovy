@@ -18,14 +18,15 @@ class GetTradesRestTest extends RestTest {
     DbSetupTestDataLoader testDataLoader
 
     @Autowired
-    TokenProvider tokenProvider
+    SecurityFilter securityFilter
 
     def "Gets single trade"() {
         given:
         testDataLoader.createDummyBidders();
         testDataLoader.createDummyTrade();
-        def token = tokenProvider.createToken(new TestingAuthenticationToken("me", "abc", newArrayList(new SimpleGrantedAuthority(AuthoritiesConstants.USER))), false)
-        def request = given().accept("application/json").header("Authorization", "Bearer " + token)
+        def request = given()
+                .filter(securityFilter)
+                .accept("application/json");
 
         when:
         def response = request.when().get("/trades/1")
@@ -33,7 +34,6 @@ class GetTradesRestTest extends RestTest {
         then:
         response.then().statusCode(200)
                 .body(matchesJsonSchemaInClasspath("trade.json"))
-                .body("itemId", equalTo("1"))
                 .body("requester.login", equalTo("agatha"))
                 .body("responder.login", equalTo("greg"))
                 .body("initialBid.placingBidder.login", equalTo("agatha"))

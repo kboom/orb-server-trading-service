@@ -3,6 +3,8 @@ package com.kbhit.orangebox.trading.dbsetup.data;
 import com.ninja_squad.dbsetup.operation.Operation;
 
 import static com.kbhit.orangebox.trading.dbsetup.builders.ItemDummyBuilder.aDummyItem;
+import static com.kbhit.orangebox.trading.dbsetup.data.InsertDummyBidders.AGATA_BIDDER_ID;
+import static com.kbhit.orangebox.trading.dbsetup.data.InsertDummyBidders.GRZEGORZ_BIDDER_ID;
 import static com.ninja_squad.dbsetup.Operations.sequenceOf;
 
 class InsertDummyItems {
@@ -16,6 +18,7 @@ class InsertDummyItems {
         return aDummyItem()
                 .withItemId(RED_AGATHA_ITEM_ID)
                 .withTradeId(tradeId)
+                .withOwnerId(AGATA_BIDDER_ID)
                 .withName("Red Agatha's item")
                 .build();
     }
@@ -24,6 +27,7 @@ class InsertDummyItems {
         return aDummyItem()
                 .withItemId(BLUE_AGATHA_ITEM_ID)
                 .withTradeId(tradeId)
+                .withOwnerId(AGATA_BIDDER_ID)
                 .withName("Blue Agatha's item")
                 .build();
     }
@@ -32,6 +36,7 @@ class InsertDummyItems {
         return aDummyItem()
                 .withItemId(RED_GREG_ITEM_ID)
                 .withTradeId(tradeId)
+                .withOwnerId(GRZEGORZ_BIDDER_ID)
                 .withName("Red Greg's item")
                 .build();
     }
@@ -40,10 +45,10 @@ class InsertDummyItems {
         return aDummyItem()
                 .withItemId(BLUE_GREG_ITEM_ID)
                 .withTradeId(tradeId)
+                .withOwnerId(GRZEGORZ_BIDDER_ID)
                 .withName("Blue Greg's item")
                 .build();
     }
-
 
     static Operation insertAll(String tradeId) {
         return sequenceOf(

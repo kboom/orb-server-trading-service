@@ -22,10 +22,6 @@ public class TradedItem {
     @JoinColumn(name = "owner_id", insertable = false, updatable = false)
     private Bidder owner;
 
-    @ManyToOne
-    @JoinColumn(name = "latest_bid_id")
-    private Bid latestBid;
-
     private String name;
 
     private TradedItem(TradedItemId tradedItemId) {
@@ -40,11 +36,7 @@ public class TradedItem {
     public Bidder getOwner() {
         return owner;
     }
-
-    public Bid getLatestBid() {
-        return latestBid;
-    }
-
+    
     public String getName() {
         return name;
     }
