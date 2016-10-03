@@ -21,10 +21,19 @@ public abstract class BehaviourSpecification extends Specification {
     @Autowired
     private TestDataLoader testDataLoader
 
+    def setupSpec() {
+        testDataLoaded = false
+    }
+
+    def cleanupSpec() {
+        testDataLoaded = false
+    }
+
     def setup() {
         if (!testDataLoaded) {
+            testDataLoader.cleanTables()
             loadTestData(testDataLoader)
-            testDataLoaded = true;
+            testDataLoaded = true
         }
     }
 
