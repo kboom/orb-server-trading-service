@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @ActiveProfiles("dev")
 @SpringBootTest(classes = {TradingApplication.class, StandaloneConfig.class, TestServicesConfig.class},
         webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-public class DomainTest {
+public abstract class DomainTest {
 
     private static boolean testDataLoaded = false;
 

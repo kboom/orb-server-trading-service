@@ -11,7 +11,7 @@ import static com.kbhit.orangebox.trading.stubs.domain.UserBuilder.aUser
 class DummyUsers {
 
     static UserBuilder agathaUser() {
-        return aUser()
+        aUser()
                 .withActivated(true)
                 .withAuthorities("user")
                 .withUsername("agatha")
@@ -19,10 +19,18 @@ class DummyUsers {
     }
 
     static UserBuilder gregUser() {
-        return aUser()
+        aUser()
                 .withActivated(true)
                 .withAuthorities("user")
                 .withUsername("greg")
+                .withPassword("secret");
+    }
+
+    static UserBuilder otherUser() {
+        aUser()
+                .withActivated(true)
+                .withAuthorities("user")
+                .withUsername("other")
                 .withPassword("secret");
     }
 
