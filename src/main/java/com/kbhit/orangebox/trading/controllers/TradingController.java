@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static com.kbhit.orangebox.trading.controllers.utils.ResourceResponseBuilder.aResourceResponse;
 import static com.kbhit.orangebox.trading.domain.TradeId.referenceTrade;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
 public class TradingController {
@@ -28,7 +29,7 @@ public class TradingController {
     private Mapper mapper;
 
     @ApiOperation(value = "getSingleTrade")
-    @RequestMapping(value = "/trades/{tradeId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/trades/{tradeId}", method = GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @Secured(AuthoritiesConstants.USER)
     public ResponseEntity<TradeDto> getTrade(@PathVariable String tradeId) {
